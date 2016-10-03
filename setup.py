@@ -7,7 +7,7 @@ setup(
   packages = ['ksamsok'],
   install_requires=['lxml'],
   version = version,
-  description = 'API library for the cultural heritage K-Samsök(SOCH) aggregator API.',
+  description = 'API library for the cultural heritage K-Samsök(SOCH) aggregator.',
   author = 'Albin Larsson',
   author_email = 'albin.post@gmail.com',
   url = 'https://github.com/Abbe98/' + repo,
