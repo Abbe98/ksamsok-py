@@ -232,3 +232,21 @@ class KSamsok:
             result.append(parsed_relation)
 
         return result
+
+    def getHints(self, string, count = 5):
+        request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=searchHelp&index=itemMotiveWord|itemKeyWord&prefix=' + string + '*&maxValueCount=' + str(count)
+        
+        r = requests.get(request_query)
+        xml = etree.XML(r.content)
+
+        result = list()
+        terms = xml.xpath('/result/terms/term')
+        for term in terms:
+            parsed_term = {}
+
+            parsed_term['count'] = term.xpath('.//count')[0].text
+            parsed_term['value'] = term.xpath('.//value')[0].text
+
+            result.append(parsed_term)
+
+        return result
