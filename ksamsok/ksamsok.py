@@ -79,8 +79,6 @@ class KSamsok:
         parsed_record['presentation']['images'] = list()
         for image in r_images:
             parsed_image = {}
-            print(image)
-            print(etree.tostring(image, xml_declaration=True))
 
             i_thumbnail = image.xpath('.//pres_src[@type=\'thumbnail\']')
             parsed_image['thumbnail'] = i_thumbnail[0].text if 0 < len(i_thumbnail) else None
@@ -169,4 +167,28 @@ class KSamsok:
         r = requests.get(request_query)
         # remove all XML namespaces, and push the bytes to etree.XML
         xml = etree.XML(str.encode(self.killXmlNamespaces(r.text)))
+
         return self.parseRecord(xml)
+
+    def search(self, text, start, hits, images = False):
+        #create the request URL
+        request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=search&hitsPerPage=' + str(hits) + '&startRecord=' + str(start) + '&query=text%3D"' + text + '"&recordSchema=presentation'
+
+        # if images = true add &thumbnailExists=j to url
+        if images: 
+            request_query = request_query + '&thumbnailExists=j'
+
+        r = requests.get(request_query)
+        # remove all XML namespaces, and push the bytes to etree.XML
+        xml = etree.XML(str.encode(self.killXmlNamespaces(r.text)))
+
+        result = {}
+        hits = xml.xpath('/result/totalHits')
+        result['hits'] = hits[0].text if 0 < len(hits) else None
+
+        result['records'] = list()
+        records = xml.xpath('/result/records/record/pres_item')
+        for record in records:
+            result['records'].append((self.parseRecord(record)))
+
+        return result
