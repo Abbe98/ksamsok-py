@@ -211,3 +211,24 @@ class KSamsok:
             result['records'].append((self.parseRecord(record)))
 
         return result
+
+    def getRelations(self, uri):
+        uri = self.formatUri(uri, 'raw')
+
+        request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=getRelations&relation=all&objectId=' + uri
+
+        r = requests.get(request_query)
+        xml = etree.XML(r.content)
+
+        result = list()
+        relations = xml.xpath('/result/relations/relation')
+        for relation in relations:
+            parsed_relation = {}
+
+            parsed_relation['uri'] = relation.text
+            parsed_relation['source'] = relation.get('source')
+            parsed_relation['type'] = relation.get('type')
+
+            result.append(parsed_relation)
+
+        return result
