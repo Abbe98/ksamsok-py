@@ -195,7 +195,7 @@ class KSamsok:
 
     def geoSearch(self, west, south, east, north, start, hits = 60):
         #create the request URL
-        request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=search&hitsPerPage=' + hits + '&startRecord=' + start + '&query=boundingBox=/WGS84%20"' + west + '%20' + south + '%20' + east + '%20' + north + '"&recordSchema=presentation'
+        request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=search&hitsPerPage=' + str(hits) + '&startRecord=' + str(start) + '&query=boundingBox=/WGS84%20"' + str(west) + '%20' + str(south) + '%20' + str(east) + '%20' + str(north) + '"&recordSchema=presentation'
 
         r = requests.get(request_query)
         # remove all XML namespaces, and push the bytes to etree.XML
