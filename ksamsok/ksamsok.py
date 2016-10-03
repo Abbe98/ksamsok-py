@@ -192,3 +192,22 @@ class KSamsok:
             result['records'].append((self.parseRecord(record)))
 
         return result
+
+    def geoSearch(self, west, south, east, north, start, hits = 60):
+        #create the request URL
+        request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=search&hitsPerPage=' + hits + '&startRecord=' + start + '&query=boundingBox=/WGS84%20"' + west + '%20' + south + '%20' + east + '%20' + north + '"&recordSchema=presentation'
+
+        r = requests.get(request_query)
+        # remove all XML namespaces, and push the bytes to etree.XML
+        xml = etree.XML(str.encode(self.killXmlNamespaces(r.text)))
+
+        result = {}
+        hits = xml.xpath('/result/totalHits')
+        result['hits'] = hits[0].text if 0 < len(hits) else None
+
+        result['records'] = list()
+        records = xml.xpath('/result/records/record/pres_item')
+        for record in records:
+            result['records'].append((self.parseRecord(record)))
+
+        return result
