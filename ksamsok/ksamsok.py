@@ -135,6 +135,8 @@ class KSamsok:
         uri = re.sub('xml/', '', uri)
         uri = re.sub('rdf/', '', uri)
         uri = re.sub('html/', '', uri)
+        uri = re.sub('jsonld/', '', uri)
+
 
         # get position of the last /
         format_index = uri.rindex('/')
@@ -158,6 +160,10 @@ class KSamsok:
             return uri[:format_index] + '/html' + uri[format_index:]
         elif(uri_format == 'htmlurl'):
             return self.endpoint + uri[:format_index] + '/html' + uri[format_index:]
+        elif(uri_format == 'jsonld'):
+            return uri[:format_index] + '/jsonld' + uri[format_index:]
+        elif(uri_format == 'jsonldurl'):
+            return self.endpoint + uri[:format_index] + '/jsonld' + uri[format_index:]
         else:
             return uri
 
