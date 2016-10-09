@@ -13,6 +13,8 @@ pip install ksamsok
 I have yet to write the future but amazing documentation for this library, sorry for that.
 
 ```python
+from ksamsok import KSamsok
+
 # init with your K-Samsök API key,
 # an optional API parameter can be used for custom API endpoints
 culturalSerach = KSamsok('test')
