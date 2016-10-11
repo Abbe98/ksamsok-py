@@ -57,16 +57,16 @@ class KSamsok:
         for context in r_contexts:
             parsed_context = {}
 
-            c_event = context.xpath('.//event')
+            c_event = context.xpath('.//pres_event')
             parsed_context['event'] = c_event[0].text if 0 < len(c_event) else None
             
-            c_place_label = context.xpath('.//place_label')
+            c_place_label = context.xpath('.//pres_placeLabel')
             parsed_context['place_label'] = c_place_label[0].text if 0 < len(c_place_label) else None
             
-            c_time_label = context.xpath('.//time_label')
+            c_time_label = context.xpath('.//pres_timeLabel')
             parsed_context['time_label'] = c_time_label[0].text if 0 < len(c_time_label) else None
             
-            c_name_label = context.xpath('.//name_label')
+            c_name_label = context.xpath('.//pres_nameLabel')
             parsed_context['name_label'] = c_name_label[0].text if 0 < len(c_name_label) else None
             
             parsed_record['presentation']['contexts'].append(parsed_context)
