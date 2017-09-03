@@ -5,7 +5,7 @@ repo = 'ksamsok-py'
 setup(
   name = 'ksamsok',
   packages = ['ksamsok'],
-  install_requires=['lxml'],
+  install_requires=['lxml', 'requests'],
   version = version,
   description = 'API library for the cultural heritage K-Samsök(SOCH) aggregator.',
   author = 'Albin Larsson',
