@@ -1,5 +1,5 @@
-from distutils.core import setup
-version = '0.2.0'
+from setuptools import setup
+version = '0.2.1'
 repo = 'ksamsok-py'
 
 setup(
