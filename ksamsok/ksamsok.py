@@ -12,7 +12,7 @@ class KSamsok:
             raise Exception('Bad API key or inaccessible endpoint.')
 
     def validateRequest(self, url):
-        r = requests.get(url)
+        r = requests.head(url)
 
         if 200 <= r.status_code <= 399:
             return True
