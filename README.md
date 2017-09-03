@@ -85,6 +85,8 @@ The `uriFormat()` method can validate and convert SOCH URI/URL;s. `uriFormat()` 
   - `rdfurl`
   - `html`
   - `htmlurl`
+  - `museumdat`
+  - `museumdaturl`
  - validate(`bool`), optional, if set to `True` it check if an object for the URI exists.
 
 ```python
@@ -113,7 +115,7 @@ Raw URLs/URIs such as:
  - `http://kulturarvsdata.se/raa/kmb/16000300020896`
  - `raa/fmi/10028201230001`
 
-HTML, JSONLD, RDF, XML resource URLs/URIs:
+HTML, JSONLD, RDF, XML, MuseumDAT resource URLs/URIs:
 
  - `http://kulturarvsdata.se/raa/kmb/xml/16000300020896`
  - `http://kulturarvsdata.se/raa/kmb/rdf/16000300020896`

@@ -164,6 +164,10 @@ class KSamsok:
             return uri[:format_index] + '/jsonld' + uri[format_index:]
         elif(uri_format == 'jsonldurl'):
             return self.endpoint + uri[:format_index] + '/jsonld' + uri[format_index:]
+        elif(uri_format == 'museumdat'):
+            return uri[:format_index] + '/museumdat' + uri[format_index:]
+        elif(uri_format == 'museumdaturl'):
+            return self.endpoint + uri[:format_index] + '/museumdat' + uri[format_index:]
         else:
             return uri
 
