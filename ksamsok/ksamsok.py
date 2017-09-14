@@ -51,7 +51,7 @@ class KSamsok:
 
         r_content = record.xpath('.//pres_content')
         parsed_record['presentation']['content'] = r_content[0].text if 0 < len(r_content) else None
-        
+
         r_contexts = record.xpath('.//pres_context')
         parsed_record['presentation']['contexts'] = list()
         for context in r_contexts:
@@ -59,16 +59,16 @@ class KSamsok:
 
             c_event = context.xpath('.//pres_event')
             parsed_context['event'] = c_event[0].text if 0 < len(c_event) else None
-            
+
             c_place_label = context.xpath('.//pres_placeLabel')
             parsed_context['place_label'] = c_place_label[0].text if 0 < len(c_place_label) else None
-            
+
             c_time_label = context.xpath('.//pres_timeLabel')
             parsed_context['time_label'] = c_time_label[0].text if 0 < len(c_time_label) else None
-            
+
             c_name_label = context.xpath('.//pres_nameLabel')
             parsed_context['name_label'] = c_name_label[0].text if 0 < len(c_name_label) else None
-            
+
             parsed_record['presentation']['contexts'].append(parsed_context)
 
         # what about areas? not supported in KSamsök-PHP?
@@ -191,7 +191,7 @@ class KSamsok:
         request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=search&hitsPerPage=' + str(hits) + '&startRecord=' + str(start) + '&query=text%3D"' + text + '"&recordSchema=presentation'
 
         # if images = true add &thumbnailExists=j to url
-        if images: 
+        if images:
             request_query = request_query + '&thumbnailExists=j'
 
         r = requests.get(request_query)
@@ -251,7 +251,7 @@ class KSamsok:
 
     def getHints(self, string, count = 5):
         request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=searchHelp&index=itemMotiveWord|itemKeyWord&prefix=' + string + '*&maxValueCount=' + str(count)
-        
+
         r = requests.get(request_query)
         xml = etree.XML(r.content)
 
