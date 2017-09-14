@@ -99,7 +99,7 @@ culturalSerach.formatUri('raa/kmb/16001000540365', 'htmlurl')
 culturalSerach.formatUri('raa/kmb/16001000540365', 'xml')
 ```
 
-```
+```python
 # validate the URI(returns the requested format if valid otherwise False)
 culturalSerach.formatUri('raa/kmb/16001000540365', 'rdf', True)
 ```
