@@ -139,7 +139,10 @@ class KSamsok:
 
 
         # get position of the last /
-        format_index = uri.rindex('/')
+        try:
+            format_index = uri.rindex('/')
+        except ValueError:
+            return False
 
         if (validate):
             test_query = self.endpoint + uri[:format_index] + '/xml' + uri[format_index:]
