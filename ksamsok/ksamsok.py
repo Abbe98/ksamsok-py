@@ -9,7 +9,7 @@ class KSamsok:
         test_query = self.endpoint + 'ksamsok/api?x-api=' + key + '&method=search&query=text%3D"test"&recordSchema=presentation'
 
         if not self.validateRequest(test_query):
-            raise Exception('Bad API key or inaccessible endpoint.')
+            raise ValueError('Bad API key or inaccessible endpoint.')
 
     def validateRequest(self, url):
         r = requests.head(url)
