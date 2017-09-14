@@ -177,6 +177,9 @@ class KSamsok:
     def getObject(self, uri):
         request_query = self.formatUri(uri, 'xmlurl')
 
+        if not request_query:
+            return False
+
         r = requests.get(request_query)
         # remove all XML namespaces, and push the bytes to etree.XML
         xml = etree.XML(str.encode(self.killXmlNamespaces(r.text)))
