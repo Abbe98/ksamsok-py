@@ -71,7 +71,6 @@ class KSamsok:
 
             parsed_record['presentation']['contexts'].append(parsed_context)
 
-        # what about areas? not supported in KSamsök-PHP?
         r_coordinates = record.xpath('.//georss_where/gml_Point/gml_coordinates')
         parsed_record['presentation']['coordinates'] = r_coordinates[0].text if 0 < len(r_coordinates) else None
 
