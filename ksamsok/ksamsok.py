@@ -231,6 +231,9 @@ class KSamsok:
     def getRelations(self, uri):
         uri = self.formatUri(uri, 'raw')
 
+        if not uri:
+            return False
+
         request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=getRelations&relation=all&objectId=' + uri
 
         r = requests.get(request_query)
