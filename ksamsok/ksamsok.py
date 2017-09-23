@@ -135,7 +135,7 @@ class KSamsok:
         uri = re.sub('rdf/', '', uri)
         uri = re.sub('html/', '', uri)
         uri = re.sub('jsonld/', '', uri)
-
+        uri = re.sub('museumdat/', '', uri)
 
         # get position of the last /
         try:
