@@ -1,6 +1,6 @@
 # KSamsök-PY
 
-KSamsök-PHP is a PHP library for the [K-Samsök(SOCH) API](http://www.ksamsok.se/in-english/). The K-Samsök aggregator has over 6.3 million cultural objects indexed from various sources.
+KSamsök-PY is a Python library for the [K-Samsök(SOCH) API](http://www.ksamsok.se/in-english/). The K-Samsök aggregator has over 6.3 million cultural objects indexed from various sources.
 
 ## Documentation
 
