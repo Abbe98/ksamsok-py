@@ -127,7 +127,8 @@ class KSamsok:
 
         return xml_string
 
-    def formatUri(self, uri, uri_format, validate = False):
+    @staticmethod
+    def formatUri(uri, uri_format, validate = False):
         if self.endpoint in uri:
             uri = re.sub(self.endpoint, '', uri)
 
@@ -173,7 +174,8 @@ class KSamsok:
         else:
             return uri
 
-    def getObject(self, uri):
+    @staticmethod
+    def getObject(uri):
         request_query = self.formatUri(uri, 'xmlurl')
 
         if not request_query:
