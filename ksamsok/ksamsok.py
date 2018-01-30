@@ -135,7 +135,11 @@ class KSamsok:
         return xml_string
 
     def formatUri(self, uri, uri_format, validate = False):
-        if self.endpoint in uri:
+        default_endpoint = 'http://kulturarvsdata.se/'
+
+        if default_endpoint in uri:
+            uri = re.sub(default_endpoint, '', uri)
+        elif self.endpoint in uri:
             uri = re.sub(self.endpoint, '', uri)
 
         uri = re.sub('xml/', '', uri)
@@ -156,27 +160,27 @@ class KSamsok:
                 return False
 
         if (uri_format == 'rawurl'):
-            return self.endpoint + uri
+            return default_endpoint + uri
         elif(uri_format == 'xml'):
             return uri[:format_index] + '/xml' + uri[format_index:]
         elif(uri_format == 'xmlurl'):
-            return self.endpoint + uri[:format_index] + '/xml' + uri[format_index:]
+            return default_endpoint + uri[:format_index] + '/xml' + uri[format_index:]
         elif(uri_format == 'rdf'):
             return uri[:format_index] + '/rdf' + uri[format_index:]
         elif(uri_format == 'rdfurl'):
-            return self.endpoint + uri[:format_index] + '/rdf' + uri[format_index:]
+            return default_endpoint + uri[:format_index] + '/rdf' + uri[format_index:]
         elif(uri_format == 'html'):
             return uri[:format_index] + '/html' + uri[format_index:]
         elif(uri_format == 'htmlurl'):
-            return self.endpoint + uri[:format_index] + '/html' + uri[format_index:]
+            return default_endpoint + uri[:format_index] + '/html' + uri[format_index:]
         elif(uri_format == 'jsonld'):
             return uri[:format_index] + '/jsonld' + uri[format_index:]
         elif(uri_format == 'jsonldurl'):
-            return self.endpoint + uri[:format_index] + '/jsonld' + uri[format_index:]
+            return default_endpoint + uri[:format_index] + '/jsonld' + uri[format_index:]
         elif(uri_format == 'museumdat'):
             return uri[:format_index] + '/museumdat' + uri[format_index:]
         elif(uri_format == 'museumdaturl'):
-            return self.endpoint + uri[:format_index] + '/museumdat' + uri[format_index:]
+            return default_endpoint + uri[:format_index] + '/museumdat' + uri[format_index:]
         else:
             return uri
 

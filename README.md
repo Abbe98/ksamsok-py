@@ -197,3 +197,5 @@ You can setup ksamsok-py to work against a custom Kulturarvsdata / K-Samsök ins
 ```python
 culturalSerach = KSamsok(key='test', endpoint='https://example.com/')
 ```
+
+Note that when using an custom endpoint `formatUri()` will still output URLs targeting kulturarvsdata.se and not the custom endpoint. It will accept custom URIs as input.
