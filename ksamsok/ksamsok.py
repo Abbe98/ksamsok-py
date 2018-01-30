@@ -2,14 +2,15 @@ import requests, re, sys
 from lxml import etree
 
 class KSamsok:
-    def __init__(self, key, endpoint = 'http://kulturarvsdata.se/'):
-        self.key = key
+    def __init__(self, key=None, endpoint = 'http://kulturarvsdata.se/'):
         self.endpoint = endpoint
+        self.key = key
 
-        test_query = self.endpoint + 'ksamsok/api?x-api=' + key + '&method=search&query=text%3D"test"&recordSchema=presentation'
+        if self.key:
+            test_query = self.endpoint + 'ksamsok/api?x-api=' + key + '&method=search&query=text%3D"test"&recordSchema=presentation'
 
-        if not self.validateRequest(test_query):
-            raise ValueError('Bad API key or inaccessible endpoint.')
+            if not self.validateRequest(test_query):
+                raise ValueError('Bad API key or inaccessible endpoint.')
 
     def validateRequest(self, url):
         r = requests.head(url)
@@ -21,6 +22,9 @@ class KSamsok:
         else:
             return False
 
+    def requiresKey(self):
+        if self.key is None:
+            raise ValueError('This method requires an API key.')
 
     def parseRecord(self, record):
         parsed_record = {}
@@ -181,7 +185,7 @@ class KSamsok:
 
         if not request_query:
             return False
-        
+
         r = requests.get(request_query)
         if not self.validHttpStatus(r.status_code):
             return False
@@ -192,7 +196,7 @@ class KSamsok:
         return self.parseRecord(xml)
 
     def search(self, text, start, hits, images = False):
-        #create the request URL
+        # create the request URL
         request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=search&hitsPerPage=' + str(hits) + '&startRecord=' + str(start) + '&query=text%3D"' + text + '"&recordSchema=presentation'
 
         # if images = true add &thumbnailExists=j to url
@@ -218,7 +222,9 @@ class KSamsok:
         return result
 
     def geoSearch(self, west, south, east, north, start, hits = 60):
-        #create the request URL
+        self.requiresKey()
+
+        # create the request URL
         request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=search&hitsPerPage=' + str(hits) + '&startRecord=' + str(start) + '&query=boundingBox=/WGS84%20"' + str(west) + '%20' + str(south) + '%20' + str(east) + '%20' + str(north) + '"&recordSchema=presentation'
 
         r = requests.get(request_query)
@@ -240,6 +246,8 @@ class KSamsok:
         return result
 
     def getRelations(self, uri):
+        self.requiresKey()
+
         uri = self.formatUri(uri, 'raw')
 
         if not uri:
@@ -267,6 +275,8 @@ class KSamsok:
         return result
 
     def getHints(self, string, count = 5):
+        self.requiresKey()
+
         request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=searchHelp&index=itemMotiveWord|itemKeyWord&prefix=' + string + '*&maxValueCount=' + str(count)
 
         r = requests.get(request_query)
