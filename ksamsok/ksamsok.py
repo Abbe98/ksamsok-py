@@ -13,11 +13,14 @@ class KSamsok:
 
     def validateRequest(self, url):
         r = requests.head(url)
+        return self.validHttpStatus(r.status_code)
 
-        if 200 <= r.status_code <= 399:
+    def validHttpStatus(self, status):
+        if 200 <= status <= 399:
             return True
         else:
             return False
+
 
     def parseRecord(self, record):
         parsed_record = {}
@@ -178,8 +181,11 @@ class KSamsok:
 
         if not request_query:
             return False
-
+        
         r = requests.get(request_query)
+        if not self.validHttpStatus(r.status_code):
+            return False
+
         # remove all XML namespaces, and push the bytes to etree.XML
         xml = etree.XML(str.encode(self.killXmlNamespaces(r.text)))
 
@@ -194,6 +200,9 @@ class KSamsok:
             request_query = request_query + '&thumbnailExists=j'
 
         r = requests.get(request_query)
+        if not self.validHttpStatus(r.status_code):
+            return False
+
         # remove all XML namespaces, and push the bytes to etree.XML
         xml = etree.XML(str.encode(self.killXmlNamespaces(r.text)))
 
@@ -213,6 +222,9 @@ class KSamsok:
         request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=search&hitsPerPage=' + str(hits) + '&startRecord=' + str(start) + '&query=boundingBox=/WGS84%20"' + str(west) + '%20' + str(south) + '%20' + str(east) + '%20' + str(north) + '"&recordSchema=presentation'
 
         r = requests.get(request_query)
+        if not self.validHttpStatus(r.status_code):
+            return False
+
         # remove all XML namespaces, and push the bytes to etree.XML
         xml = etree.XML(str.encode(self.killXmlNamespaces(r.text)))
 
@@ -236,6 +248,9 @@ class KSamsok:
         request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=getRelations&relation=all&objectId=' + uri
 
         r = requests.get(request_query)
+        if not self.validHttpStatus(r.status_code):
+            return False
+
         xml = etree.XML(r.content)
 
         result = list()
@@ -255,6 +270,9 @@ class KSamsok:
         request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=searchHelp&index=itemMotiveWord|itemKeyWord&prefix=' + string + '*&maxValueCount=' + str(count)
 
         r = requests.get(request_query)
+        if not self.validHttpStatus(r.status_code):
+            return False
+
         xml = etree.XML(r.content)
 
         result = list()
