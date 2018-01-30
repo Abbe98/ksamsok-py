@@ -71,7 +71,7 @@ culturalSerach.geoSearch(16.41, 59.07, 16.42, 59.08, 300, 500)
 
 #### URI Format
 
-The `uriFormat()` method can validate and convert SOCH URI/URL;s. `uriFormat()` will return `False` if provided with a invalid URI. `uriFormat()` has three parameters:
+The `formatUri()` method can validate and convert SOCH URI/URL;s. `formatUri()` will return `False` if provided with a invalid URI. `formatUri()` has three parameters:
 
  - uri(`string`), the URI or URL to the object.
  - format(`string`), All supported output/input formats:
