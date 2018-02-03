@@ -2,22 +2,29 @@ import requests, re, sys
 from lxml import etree
 
 class KSamsok:
-    def __init__(self, key, endpoint = 'http://kulturarvsdata.se/'):
-        self.key = key
+    def __init__(self, key=None, endpoint = 'http://kulturarvsdata.se/'):
         self.endpoint = endpoint
+        self.key = key
 
-        test_query = self.endpoint + 'ksamsok/api?x-api=' + key + '&method=search&query=text%3D"test"&recordSchema=presentation'
+        if self.key:
+            test_query = self.endpoint + 'ksamsok/api?x-api=' + key + '&method=search&query=text%3D"test"&recordSchema=presentation'
 
-        if not self.validateRequest(test_query):
-            raise ValueError('Bad API key or inaccessible endpoint.')
+            if not self.validateRequest(test_query):
+                raise ValueError('Bad API key or inaccessible endpoint.')
 
     def validateRequest(self, url):
         r = requests.head(url)
+        return self.validHttpStatus(r.status_code)
 
-        if 200 <= r.status_code <= 399:
+    def validHttpStatus(self, status):
+        if 200 <= status <= 399:
             return True
         else:
             return False
+
+    def requiresKey(self):
+        if self.key is None:
+            raise ValueError('This method requires an API key.')
 
     def parseRecord(self, record):
         parsed_record = {}
@@ -128,7 +135,11 @@ class KSamsok:
         return xml_string
 
     def formatUri(self, uri, uri_format, validate = False):
-        if self.endpoint in uri:
+        default_endpoint = 'http://kulturarvsdata.se/'
+
+        if default_endpoint in uri:
+            uri = re.sub(default_endpoint, '', uri)
+        elif self.endpoint in uri:
             uri = re.sub(self.endpoint, '', uri)
 
         uri = re.sub('xml/', '', uri)
@@ -149,27 +160,27 @@ class KSamsok:
                 return False
 
         if (uri_format == 'rawurl'):
-            return self.endpoint + uri
+            return default_endpoint + uri
         elif(uri_format == 'xml'):
             return uri[:format_index] + '/xml' + uri[format_index:]
         elif(uri_format == 'xmlurl'):
-            return self.endpoint + uri[:format_index] + '/xml' + uri[format_index:]
+            return default_endpoint + uri[:format_index] + '/xml' + uri[format_index:]
         elif(uri_format == 'rdf'):
             return uri[:format_index] + '/rdf' + uri[format_index:]
         elif(uri_format == 'rdfurl'):
-            return self.endpoint + uri[:format_index] + '/rdf' + uri[format_index:]
+            return default_endpoint + uri[:format_index] + '/rdf' + uri[format_index:]
         elif(uri_format == 'html'):
             return uri[:format_index] + '/html' + uri[format_index:]
         elif(uri_format == 'htmlurl'):
-            return self.endpoint + uri[:format_index] + '/html' + uri[format_index:]
+            return default_endpoint + uri[:format_index] + '/html' + uri[format_index:]
         elif(uri_format == 'jsonld'):
             return uri[:format_index] + '/jsonld' + uri[format_index:]
         elif(uri_format == 'jsonldurl'):
-            return self.endpoint + uri[:format_index] + '/jsonld' + uri[format_index:]
+            return default_endpoint + uri[:format_index] + '/jsonld' + uri[format_index:]
         elif(uri_format == 'museumdat'):
             return uri[:format_index] + '/museumdat' + uri[format_index:]
         elif(uri_format == 'museumdaturl'):
-            return self.endpoint + uri[:format_index] + '/museumdat' + uri[format_index:]
+            return default_endpoint + uri[:format_index] + '/museumdat' + uri[format_index:]
         else:
             return uri
 
@@ -180,13 +191,16 @@ class KSamsok:
             return False
 
         r = requests.get(request_query)
+        if not self.validHttpStatus(r.status_code):
+            return False
+
         # remove all XML namespaces, and push the bytes to etree.XML
         xml = etree.XML(str.encode(self.killXmlNamespaces(r.text)))
 
         return self.parseRecord(xml)
 
     def search(self, text, start, hits, images = False):
-        #create the request URL
+        # create the request URL
         request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=search&hitsPerPage=' + str(hits) + '&startRecord=' + str(start) + '&query=text%3D"' + text + '"&recordSchema=presentation'
 
         # if images = true add &thumbnailExists=j to url
@@ -194,6 +208,9 @@ class KSamsok:
             request_query = request_query + '&thumbnailExists=j'
 
         r = requests.get(request_query)
+        if not self.validHttpStatus(r.status_code):
+            return False
+
         # remove all XML namespaces, and push the bytes to etree.XML
         xml = etree.XML(str.encode(self.killXmlNamespaces(r.text)))
 
@@ -209,10 +226,15 @@ class KSamsok:
         return result
 
     def geoSearch(self, west, south, east, north, start, hits = 60):
-        #create the request URL
+        self.requiresKey()
+
+        # create the request URL
         request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=search&hitsPerPage=' + str(hits) + '&startRecord=' + str(start) + '&query=boundingBox=/WGS84%20"' + str(west) + '%20' + str(south) + '%20' + str(east) + '%20' + str(north) + '"&recordSchema=presentation'
 
         r = requests.get(request_query)
+        if not self.validHttpStatus(r.status_code):
+            return False
+
         # remove all XML namespaces, and push the bytes to etree.XML
         xml = etree.XML(str.encode(self.killXmlNamespaces(r.text)))
 
@@ -228,6 +250,8 @@ class KSamsok:
         return result
 
     def getRelations(self, uri):
+        self.requiresKey()
+
         uri = self.formatUri(uri, 'raw')
 
         if not uri:
@@ -236,6 +260,9 @@ class KSamsok:
         request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=getRelations&relation=all&objectId=' + uri
 
         r = requests.get(request_query)
+        if not self.validHttpStatus(r.status_code):
+            return False
+
         xml = etree.XML(r.content)
 
         result = list()
@@ -252,9 +279,14 @@ class KSamsok:
         return result
 
     def getHints(self, string, count = 5):
+        self.requiresKey()
+
         request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=searchHelp&index=itemMotiveWord|itemKeyWord&prefix=' + string + '*&maxValueCount=' + str(count)
 
         r = requests.get(request_query)
+        if not self.validHttpStatus(r.status_code):
+            return False
+
         xml = etree.XML(r.content)
 
         result = list()

@@ -1,6 +1,6 @@
 # KSamsök-PY
 
-KSamsök-PHP is a PHP library for the [K-Samsök(SOCH) API](http://www.ksamsok.se/in-english/). The K-Samsök aggregator has over 6.3 million cultural objects indexed from various sources.
+KSamsök-PY is a Python library for the [K-Samsök(SOCH) API](http://www.ksamsok.se/in-english/). The K-Samsök aggregator has over 6.8 million cultural objects indexed from various sources.
 
 ## Documentation
 
@@ -20,21 +20,25 @@ pip install ksamsok
 from ksamsok import KSamsok
 ```
 
-The API requires a API key that you can obtain by contacting the Swedish National Heritage Board. For development you can use the key `test`.
+Many action within the API requires an API key that you can obtain by contacting the Swedish National Heritage Board. For development you can use the key `test`.
 
-Create a new instance of the KSamsok class and include your API key.
+For using this library against custom Kulturarvsdata / K-Samsök endpoints see a section at the end of this document.
 
- - An optional parameter exists for setting custom K-Samsök endpoints.
+Example without an API key:
+
+```python
+culturalSerach = KSamsok()
+```
+
+Example with an API key:
 
 ```python
 culturalSerach = KSamsok('test')
 ```
 
-```python
-culturalSerach = KSamsok('test', 'https://example.com/endpoint/')
-```
-
 #### Text Search
+
+Requires an API key.
 
 The basic `search()` method has a total of four parameters:
 
@@ -55,6 +59,8 @@ culturalSerach.search('kyrka', 0, 10, true)
 
 #### Bounding Box Search
 
+Requires an API key.
+
 The method `geoSearch()` allows you to search by a geographical bounding box. `geoSearch()` has six parameters:
 
  - west(`int`), the most west longitude border of your bounding box.
@@ -71,7 +77,7 @@ culturalSerach.geoSearch(16.41, 59.07, 16.42, 59.08, 300, 500)
 
 #### URI Format
 
-The `uriFormat()` method can validate and convert SOCH URI/URL;s. `uriFormat()` will return `False` if provided with a invalid URI. `uriFormat()` has three parameters:
+The `formatUri()` method can validate and convert SOCH URI/URL;s. `formatUri()` will return `False` if provided with a invalid URI. `formatUri()` has three parameters:
 
  - uri(`string`), the URI or URL to the object.
  - format(`string`), All supported output/input formats:
@@ -105,6 +111,8 @@ culturalSerach.formatUri('raa/kmb/16001000540365', 'rdf', True)
 ```
 
 #### Relations
+
+Requires an API key.
 
 The `getRelations()` method allows you to return a list of object related to another. The method has only one parameter:
 
@@ -160,6 +168,8 @@ culturalSerach.getObject('raa/fmi/10028201230001')
 
 #### Search Hints
 
+Requires an API key.
+
 The `getHints()` method allows you to return search suggestions from a string. This method has two parameters:
 
  - text(`string`), the string to get suggestions from.
@@ -179,3 +189,13 @@ When KSamsök-PY does not have a method for a request you want to preform agains
 There are two `protected` methods that essential when extending `KSamsok`, `killXmlNamespaces()` and `parseRecord()` those are the same functions as `public` methods uses.
 
 To get started with see the [implementation of `search()`](https://github.com/Abbe98/ksamsok-py/blob/master/ksamsok/ksamsok.py#L179). Note that `KSamsok` parses and uses the "XML Presentation" format and not the RDF format provided by SOCH.
+
+### Advanced Usage: Custom Endpoint
+
+You can setup ksamsok-py to work against a custom Kulturarvsdata / K-Samsök instance by passing in an `endpoint` parameter to the constructor:
+
+```python
+culturalSerach = KSamsok(key='test', endpoint='https://example.com/')
+```
+
+Note that when using an custom endpoint `formatUri()` will still output URLs targeting kulturarvsdata.se and not the custom endpoint. It will accept custom URIs as input.
