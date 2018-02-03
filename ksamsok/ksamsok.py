@@ -118,9 +118,9 @@ class KSamsok:
 
             parsed_record['presentation']['images'].append(parsed_image)
 
-        parsed_record['presentation']['references'] = list()
-        for reference in record.xpath('.//pres_references/pres_reference'):
-            parsed_record['presentation']['references'].append(reference.text)
+        parsed_record['presentation']['representations'] = list()
+        for representation in record.xpath('.//pres_representations/pres_representation'):
+            parsed_record['presentation']['representations'].append(representation.text)
 
         return parsed_record
 
