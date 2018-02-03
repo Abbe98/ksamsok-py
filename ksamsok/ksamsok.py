@@ -40,6 +40,9 @@ class KSamsok:
         r_type = record.xpath('.//pres_type')
         parsed_record['presentation']['type'] = r_type[0].text if 0 < len(r_type) else None
 
+        r_organization = record.xpath('.//pres_organization')
+        parsed_record['presentation']['organization'] = r_organization[0].text if 0 < len(r_type) else None
+
         r_id = record.xpath('.//pres_id')
         parsed_record['presentation']['id'] = r_id[0].text if 0 < len(r_id) else None
 
