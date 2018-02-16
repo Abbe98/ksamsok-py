@@ -188,6 +188,17 @@ class KSamsok:
         else:
             return uri
 
+    def kringlaToUri(self, kringla, uri_format):
+        if 'http://www.kringla.nu/kringla/objekt?' not in kringla:
+            return False
+
+        re_matches = re.search(r'(\?|&)referens=(.+)($|&)', kringla)
+
+        if not re_matches.group(2):
+            return False
+        
+        return self.formatUri(re_matches.group(2), uri_format)
+
     def getObject(self, uri):
         request_query = self.formatUri(uri, 'xmlurl')
 
