@@ -1,4 +1,5 @@
-import requests, re, sys
+import re
+import requests
 from lxml import etree
 
 class KSamsok:
