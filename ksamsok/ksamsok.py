@@ -159,7 +159,7 @@ class KSamsok:
             return False
 
         if (validate):
-            test_query = self.endpoint + uri[:format_index] + '/xml' + uri[format_index:]
+            test_query = self.endpoint + uri[:format_index] + uri[format_index:]
             if not self.validateRequest(test_query):
                 return False
 
