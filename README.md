@@ -110,6 +110,10 @@ culturalSerach.formatUri('raa/kmb/16001000540365', 'xml')
 culturalSerach.formatUri('raa/kmb/16001000540365', 'rdf', True)
 ```
 
+#### Kringla to URI
+
+The `kringlaToUri()` method can convert Kringla.nu item URLs to Kulturarvsdata URIds similar to `formatUri()`.
+
 #### Relations
 
 Requires an API key.
