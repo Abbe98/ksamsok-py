@@ -27,13 +27,13 @@ For using this library against custom Kulturarvsdata / K-Samsök endpoints see a
 Example without an API key:
 
 ```python
-culturalSerach = KSamsok()
+culturalSearch = KSamsok()
 ```
 
 Example with an API key:
 
 ```python
-culturalSerach = KSamsok('test')
+culturalSearch = KSamsok('test')
 ```
 
 #### Text Search
@@ -49,12 +49,12 @@ The basic `search()` method has a total of four parameters:
 
 ```python
 # search for "kyrka" starting at the first result returning the next 10 results
-culturalSerach.search('kyrka', 0, 10)
+culturalSearch.search('kyrka', 0, 10)
 ```
 
 ```python
 # search for "kyrka" starting at the first result returning the next 10 results but only include results with images
-culturalSerach.search('kyrka', 0, 10, true)
+culturalSearch.search('kyrka', 0, 10, true)
 ```
 
 #### Bounding Box Search
@@ -72,7 +72,7 @@ The method `geoSearch()` allows you to search by a geographical bounding box. `g
 
 ```python
 # Search within bonding box(west, south, east, north) starting at result 300 returning 500 results
-culturalSerach.geoSearch(16.41, 59.07, 16.42, 59.08, 300, 500)
+culturalSearch.geoSearch(16.41, 59.07, 16.42, 59.08, 300, 500)
 ```
 
 #### URI Format
@@ -97,22 +97,48 @@ The `formatUri()` method can validate and convert SOCH URI/URL;s. `formatUri()` 
 
 ```python
 # get the HTML-link version of the following URI
-culturalSerach.formatUri('raa/kmb/16001000540365', 'htmlurl')
+culturalSearch.formatUri('raa/kmb/16001000540365', 'htmlurl')
 ```
 
 ```python
 # get the XML resource URI
-culturalSerach.formatUri('raa/kmb/16001000540365', 'xml')
+culturalSearch.formatUri('raa/kmb/16001000540365', 'xml')
 ```
 
 ```python
 # validate the URI(returns the requested format if valid otherwise False)
-culturalSerach.formatUri('raa/kmb/16001000540365', 'rdf', True)
+culturalSearch.formatUri('raa/kmb/16001000540365', 'rdf', True)
 ```
 
 #### Kringla to URI
 
-The `kringlaToUri()` method can convert Kringla.nu item URLs to Kulturarvsdata URIds similar to `formatUri()`.
+The `kringlaToUri()` method can convert Kringla.nu item URLs to Kulturarvsdata URIds similar to `formatUri()`. `kringlaToUri()` will return `False` if it's given a invalid Kringla.nu item URL.
+
+ - kringla(`string`), the URL to the item at Kringla.nu.
+ - format(`string`), All supported output/input formats:
+  - `raw`(default)
+  - `rawurl`
+  - `xml`
+  - `xmlurl`
+  - `jsonld`
+  - `jsonldurl`
+  - `rdf`
+  - `rdfurl`
+  - `html`
+  - `htmlurl`
+  - `museumdat`
+  - `museumdaturl`
+ - validate(`bool`), optional, if set to `True` it check if an object for the URI exists.
+
+```python
+# get the full kulturarvsdata URL from a basic Kringla item link.
+culturalSearch.kringlaToUri('http://www.kringla.nu/kringla/objekt?referens=raa/fmi/10253101370001', 'rawurl')
+```
+
+```python
+# get the RDF resource id from a Kringla link with search parameters
+culturalSearch.kringlaToUri('http://www.kringla.nu/kringla/objekt?filter=itemType%3Dfoto&referens=DFH/media/DFH_DFH00574', 'rdf')
+```
 
 #### Relations
 
@@ -140,7 +166,7 @@ HTML, JSONLD, RDF, XML, MuseumDAT resource URLs/URIs:
 
 ```python
 # get all relations from URI
-culturalSerach.getRelations('raa/fmi/10028201230001')
+culturalSearch.getRelations('raa/fmi/10028201230001')
 ```
 
 #### Object
@@ -167,7 +193,7 @@ HTML, JSONLD, RDF, XML resource URLs/URIs:
 
 ```python
 # get single object (record)
-culturalSerach.getObject('raa/fmi/10028201230001')
+culturalSearch.getObject('raa/fmi/10028201230001')
 ```
 
 #### Search Hints
@@ -181,7 +207,7 @@ The `getHints()` method allows you to return search suggestions from a string. T
 
 ```python
 # get a search hint for the string "na"
-culturalSerach.getHints('na')
+culturalSearch.getHints('na')
 ```
 
 ### Advanced Usage: Extending
@@ -199,7 +225,7 @@ To get started with see the [implementation of `search()`](https://github.com/Ab
 You can setup ksamsok-py to work against a custom Kulturarvsdata / K-Samsök instance by passing in an `endpoint` parameter to the constructor:
 
 ```python
-culturalSerach = KSamsok(key='test', endpoint='https://example.com/')
+culturalSearch = KSamsok(key='test', endpoint='https://example.com/')
 ```
 
 Note that when using an custom endpoint `formatUri()` will still output URLs targeting kulturarvsdata.se and not the custom endpoint. It will accept custom URIs as input.
