@@ -1,4 +1,5 @@
-import requests, re, sys
+import re
+import requests
 from lxml import etree
 
 class KSamsok:
@@ -158,7 +159,7 @@ class KSamsok:
             return False
 
         if (validate):
-            test_query = self.endpoint + uri[:format_index] + '/xml' + uri[format_index:]
+            test_query = self.endpoint + uri[:format_index] + uri[format_index:]
             if not self.validateRequest(test_query):
                 return False
 
@@ -186,6 +187,17 @@ class KSamsok:
             return default_endpoint + uri[:format_index] + '/museumdat' + uri[format_index:]
         else:
             return uri
+
+    def kringlaToUri(self, kringla, uri_format, validate = False):
+        if 'http://www.kringla.nu/kringla/objekt?' not in kringla:
+            return False
+
+        re_matches = re.search(r'(\?|&)referens=(.+)($|&)', kringla)
+
+        if not re_matches.group(2):
+            return False
+        
+        return self.formatUri(re_matches.group(2), uri_format, validate)
 
     def getObject(self, uri):
         request_query = self.formatUri(uri, 'xmlurl')
