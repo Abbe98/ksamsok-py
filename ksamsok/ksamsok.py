@@ -80,6 +80,9 @@ class KSamsok:
             c_name_label = context.xpath('.//pres_nameLabel')
             parsed_context['name_label'] = c_name_label[0].text if 0 < len(c_name_label) else None
 
+            if all(value == None for value in parsed_context.values()):
+                break
+
             parsed_record['presentation']['contexts'].append(parsed_context)
 
         r_coordinates = record.xpath('.//georss_where/gml_Point/gml_coordinates')
