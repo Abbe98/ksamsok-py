@@ -1,5 +1,5 @@
 from setuptools import setup
-version = '0.5.0'
+version = '0.5.1'
 repo = 'ksamsok-py'
 
 setup(
