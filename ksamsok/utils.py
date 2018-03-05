@@ -81,6 +81,8 @@ def province_uri_to_string(uri):
 
     return False
 
+def validate_uri(uri):
+    return validate_request(uri)
 
 def validate_request(url):
     r = requests.head(url)
