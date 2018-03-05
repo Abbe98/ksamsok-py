@@ -30,7 +30,6 @@ def hints(auth, text, count=5):
 
     result = list()
     for term in re.finditer(terms_pattern, r.text):
-        print(term)
         parsed_term = {}
 
         parsed_term['value'] = value_pattern.search(term.group(1)).group(1)

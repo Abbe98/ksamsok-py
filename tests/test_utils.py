@@ -24,7 +24,7 @@ invalid_kulturarvsdata = [
     'rdf/16000300020896',
     'http://kulturarvsdata.se/raa/kmb/',
     'raa/kmb/xml/',
-    ''
+    '',
 ]
 
 def test_kringla_to_uri_basic():
