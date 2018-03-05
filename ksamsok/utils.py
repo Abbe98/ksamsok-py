@@ -85,8 +85,11 @@ def validate_uri(uri):
     return validate_request(uri)
 
 def validate_request(url):
-    r = requests.head(url)
-    return valid_http_status(r.status_code)
+    try:
+        r = requests.head(url)
+        return valid_http_status(r.status_code)
+    except:
+        return False
 
 def valid_http_status(status):
     if 200 <= status <= 399:
