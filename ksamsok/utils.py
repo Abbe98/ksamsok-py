@@ -25,6 +25,12 @@ def kulturarvsdata_to_uri(kulturarvsdata):
     uri = re.sub('jsonld/', '', uri)
     uri = re.sub('museumdat/', '', uri)
 
+    if uri.endswith('/'):
+        uri = uri[:-1]
+
+    if uri.count('/') is not 5:
+        return False
+
     return uri
 
 def kulturarvsdata_to_id(kulturarvsdata):
@@ -39,6 +45,12 @@ def kulturarvsdata_to_id(kulturarvsdata):
     r_id = re.sub('html/', '', r_id)
     r_id = re.sub('jsonld/', '', r_id)
     r_id = re.sub('museumdat/', '', r_id)
+
+    if r_id.endswith('/'):
+        r_id = r_id[:-1]
+
+    if r_id.count('/') is not 2:
+        return False
 
     return r_id
 
