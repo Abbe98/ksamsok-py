@@ -23,6 +23,8 @@ def test_from_uri():
     assert record.raw_rdf.startswith('<?xml version="1.0" encoding="UTF-8"?>')
     assert record.raw_rdf.endswith('</rdf:RDF>')
 
+def test_not_able_to_parse_error():
+    pass
 
 def test_parse_meta_data():
     record = Record.from_file('tests/resources/record_with_meta_only.rdf')
@@ -34,3 +36,22 @@ def test_parse_meta_data():
     assert record.meta['service_org'] == 'MILI'
     assert record.meta['soch_version'] == '1.1'
 
+def test_parse_core_values():
+    record = Record.from_file('')
+
+    assert record.uri == ''
+    assert record.url == ''
+    assert record.museumdat == ''
+    assert record.thumbnail == ''
+    assert record.super_type == ''
+    assert record.type == ''
+    assert record.label == ''
+
+def test_parse_iterative_values():
+    pass
+
+def test_parse_empty_iterative_values():
+    pass
+
+def test_all_empty_except_uri():
+    pass

@@ -78,6 +78,19 @@ class Record:
         label_pattern = re.compile(r'<ns(?:\d):itemLabel>(.+?)<\/ns(?:\d):itemLabel>')
         data_quality_pattern = re.compile(r'<ns(?:\d):dataQuality rdf:resource="(.+?)"\/>')
 
+        self.uri = self.if_match(uri_pattern, self.raw_rdf)
+        if not self.uri:
+            #TODO better exception
+            raise Exception('Could not parse URI from given record')
+
+        self.data_quality = self.if_match(data_quality_pattern, self.raw_rdf)
+        self.url = self.if_match(uri_pattern, self.raw_rdf)
+        self.museumdat = self.if_match(museumdat_pattern, self.raw_rdf)
+        self.thumbnail = self.if_match(thumbnail_pattern, self.raw_rdf)
+        self.label = self.if_match(label_pattern, self.raw_rdf)
+        self.super_type = self.if_match(super_type_pattern, self.raw_rdf)
+        self.type = self.if_match(type_pattern, self.raw_rdf)
+
         collection_pattern = re.compile(r'') #LOOP!
         theme_pattern = re.compile(r'') #LOOP!
         subject_pattern = re.compile(r'') #LOOP!
@@ -88,15 +101,6 @@ class Record:
         description_pattern = re.compile(r'') #LOOP!
         key_word_pattern = re.compile(r'') #LOOP!
         motive_key_work_pattern = re.compile(r'') #LOOP!
-
-        self.uri = self.if_match(uri_pattern, self.raw_rdf)
-        self.data_quality = self.if_match(data_quality_pattern, self.raw_rdf)
-        self.url = self.if_match(uri_pattern, self.raw_rdf)
-        self.museumdat = self.if_match(museumdat_pattern, self.raw_rdf)
-        self.thumbnail = self.if_match(thumbnail_pattern, self.raw_rdf)
-        self.label = self.if_match(label_pattern, self.raw_rdf)
-        self.super_type = self.if_match(super_type_pattern, self.raw_rdf)
-        self.type = self.if_match(type_pattern, self.raw_rdf)
 
     def exists(self):
         # should implement utils.validate_request but from local extracted URI
