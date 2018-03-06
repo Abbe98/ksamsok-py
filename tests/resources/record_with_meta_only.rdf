@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF 
+    xmlns:ns1="http://kulturarvsdata.se/ksamsok#" 
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <rdf:Description rdf:about="http://kulturarvsdata.se/KBG/photo/KBGF051559">
+        <ns1:buildDate>2018-02-27</ns1:buildDate>
+        <ns1:createdDate>2018-02-27</ns1:createdDate>
+        <ns1:ksamsokVersion>1.1</ns1:ksamsokVersion>
+        <ns1:lastChangedDate>2017-06-28</ns1:lastChangedDate>
+        <ns1:serviceName>object</ns1:serviceName>
+        <ns1:serviceOrganization>MILI</ns1:serviceOrganization>
+    </rdf:Description>
+</rdf:RDF>

@@ -22,3 +22,15 @@ def test_from_uri():
 
     assert record.raw_rdf.startswith('<?xml version="1.0" encoding="UTF-8"?>')
     assert record.raw_rdf.endswith('</rdf:RDF>')
+
+
+def test_parse_meta_data():
+    record = Record.from_file('tests/resources/record_with_meta_only.rdf')
+
+    assert record.meta['build_date'] == '2018-02-27'
+    assert record.meta['created_date'] == '2018-02-27'
+    assert record.meta['last_changed_date'] == '2017-06-28'
+    assert record.meta['service'] == 'object'
+    assert record.meta['service_org'] == 'MILI'
+    assert record.meta['soch_version'] == '1.1'
+
