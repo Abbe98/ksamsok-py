@@ -24,7 +24,7 @@ def hints(auth, text, count=5):
     if not valid_http_status(r.status_code):
         return False
 
-    terms_pattern = re.compile(r'<term>((?:.|\n)+?)<\/term>')
+    terms_pattern = re.compile(r'<term>((.|\n)+?)<\/term>')
     value_pattern = re.compile(r'<value>(.+?)<\/value>')
     count_pattern = re.compile(r'<count>(\d+)<\/count>')
 
