@@ -50,11 +50,11 @@ class Record:
         service_org_pattern = re.compile(r'<ns(?:\d):serviceOrganization>(.+?)<\/ns(?:\d):serviceOrganization>')
         data_quality_pattern = re.compile(r'<ns(?:\d):dataQuality rdf:resource="(.+?)"\/>')
         url_pattern = re.compile(r'<ns(?:\d):url>(.+?)<\/ns(?:\d):url>')
-        museumdat_pattern = re.compile(r'')
+        museumdat_pattern = re.compile(r'<ns(?:\d):museumdatUrl>(.+?)<\/ns(?:\d):museumdatUrl>')
         thumbnail_pattern = re.compile(r'<ns(?:\d):thumbnail>(.+?)<\/ns(?:\d):thumbnail>')
-        super_type_pattern = re.compile(r'')
-        type_pattern = re.compile(r'')
-        label_pattern = re.compile(r'')
+        super_type_pattern = re.compile(r'<ns(?:\d):itemSuperType rdf:resource="(.+?)"\/>')
+        type_pattern = re.compile(r'<ns(?:\d):itemSuperType rdf:resource="(.+?)"\/>')
+        label_pattern = re.compile(r'<ns(?:\d):itemLabel>(.+?)<\/ns(?:\d):itemLabel>')
 
         collection_pattern = re.compile(r'') #LOOP!
         theme_pattern = re.compile(r'') #LOOP!
