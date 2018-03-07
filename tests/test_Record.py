@@ -53,7 +53,46 @@ def test_parse_core_values():
     assert record.type == 'http://kulturarvsdata.se/resurser/EntityType#specTyp'
 
 def test_parse_iterative_values():
-    pass
+    record = Record.from_file('tests/resources/full_record.rdf')
+
+    assert isinstance(record.collections, list)
+    assert isinstance(record.themes, list)
+    assert isinstance(record.subjects, list)
+    assert isinstance(record.media_types, list)
+    assert isinstance(record.classes, list)
+    assert isinstance(record.class_names, list)
+    assert isinstance(record.titles, list)
+    assert isinstance(record.key_words, list)
+    assert isinstance(record.motive_key_words, list)
+
+    assert record.collections[0] == 'Samlingsnamn1'
+    assert record.collections[1] == 'Samlingsnamn2'
+
+    assert record.themes[0] == 'http://kulturarvsdata.se/resurser/Theme#tema1'
+    assert record.themes[1] == 'http://kulturarvsdata.se/resurser/Theme#tema2'
+
+    assert record.subjects[0] == 'http://kulturarvsdata.se/resurser/Subject#specAmne1'
+    assert record.subjects[1] == 'http://kulturarvsdata.se/resurser/Subject#specAmne2'
+    assert record.subjects[2] == 'http://kulturarvsdata.se/resurser/Subject#specAmne3'
+
+    assert record.media_types[0] == 'specMediatyp1'
+    assert record.media_types[1] == 'specMediatyp2'
+
+    assert record.classes[0] == 'http://kulturarvsdata.se/resurser/EntityClass/outline#class1'
+    assert record.classes[1] == 'http://kulturarvsdata.se/resurser/EntityClass/outline#class2'
+
+    assert record.class_names[0] == 'Klass eller kategori 1'
+    assert record.class_names[1] == 'Klass eller kategori 2'
+
+    assert record.titles[0] == 'Titel eller verksnamn 1'
+    assert record.titles[1] == 'Titel eller verksnamn 2'
+
+    assert record.key_words[0] == 'Nyckelord 1'
+    assert record.key_words[1] == 'Nyckelord 2'
+
+    assert record.motive_key_words[0] == 'Motivord 1'
+    assert record.motive_key_words[1] == 'Motivord 2'
+
 
 def test_parse_empty_iterative_values():
     pass

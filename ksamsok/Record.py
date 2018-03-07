@@ -24,9 +24,7 @@ class Record:
     media_types = list()
     classes = list()
     class_names = list()
-    name = list()
     titles = list()
-    descriptions = list()
     key_words = list()
     motive_key_words = list()
 

@@ -44,7 +44,7 @@
         <itemClass rdf:resource="http://kulturarvsdata.se/resurser/EntityClass/outline#class1" />
         <itemClass rdf:resource="http://mydomain.se/resurser/EntityClass/otherHierarchy#class2" />
         <!-- Om det _inte_ finns en klassifikationsresurs: -->
-        <itemClassName>Klass eller kategori 1 (i väntan på att den semantiska webben slår igenom är det bra att ange klassnamnet här även om man redan använt itemClass)</itemClassName>
+        <itemClassName>Klass eller kategori 1</itemClassName>
         <itemClassName>Klass eller kategori 2</itemClassName>
         <itemLicense rdf:resource="http://kulturarvsdata.se/resurser/License#specLicens" />
         <!-- se http://kulturarvsdata.se/resurser/license/license.rdf -->
@@ -53,13 +53,13 @@
         <itemName rdf:nodeID="name001" />
         <itemLabel>item label</itemLabel>
         <itemSpecification rdf:nodeID="spec001" />
-        <itemTitle>Titel eller verksnamn</itemTitle>
+        <itemTitle>Titel eller verksnamn 1</itemTitle>
         <itemTitle>Titel eller verksnamn 2</itemTitle>
         <itemDescription rdf:nodeID="desc001" />
-        <itemKeyWord>Nyckelord</itemKeyWord>
-        <itemKeyWord>Nyckelord</itemKeyWord>
-        <itemMotiveWord>Motivord</itemMotiveWord>
-        <itemMotiveWord>Motivord</itemMotiveWord>
+        <itemKeyWord>Nyckelord 1</itemKeyWord>
+        <itemKeyWord>Nyckelord 2</itemKeyWord>
+        <itemMotiveWord>Motivord 1</itemMotiveWord>
+        <itemMotiveWord>Motivord 2</itemMotiveWord>
 
         <itemMaterial rdf:nodeID="mat001" />
         <itemTechnique>Teknik för att producera objektet, t ex "slipad"</itemTechnique>
@@ -75,6 +75,7 @@
         <gender>male eller female - används endast för Agenter</gender>
         <title>Används endast för Agenter</title>
         <organization>Används endast för Agenter</organization>
+
         <itemNumber rdf:nodeID="num001" />
         <itemMeasurement rdf:nodeID="meas001" />
         <context rdf:nodeID="ctx001" />
