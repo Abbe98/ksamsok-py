@@ -20,7 +20,7 @@
         <!--Format: YYYY-MM-DD (exempel 2008-09-15) enligt ISO 8601 -->
         <collection>Samlingsnamn1</collection>
         <collection>Samlingsnamn2</collection>
-        <theme rdf:resource="http://kulturarvsdata.se/resurser/Theme#tema1" />
+        <theme rdf:resource="http://kulturarvsdata.se/resurser/Theme#tema1"/>
         <theme rdf:resource="http://example.com/resurser/Theme#tema2" />
         <createdDate>Skapad datum</createdDate>
         <lastChangedDate>Senast ändrad</lastChangedDate>
@@ -34,15 +34,15 @@
         <subject rdf:resource="http://kulturarvsdata.se/resurser/Subject#specAmne3"/>
         <!--Mediatyp enl MIME, t ex "image/gif" -->
         <mediaType rdf:resource="http://kulturarvsdata.se/resurser/MediaType#specMediatyp1" />
-        <mediaType rdf:resource="http://kulturarvsdata.se/resurser/MediaType#specMediatyp2" />
+        <mediaType rdf:resource="http://kulturarvsdata.se/resurser/MediaType#specMediatyp2"/>
         <dataQuality rdf:resource="http://kulturarvsdata.se/resurser/DataQuality#specKvalitet" />
         <!--Övernivå till objekttyp, agent, fysiskt ting, händelse eller koncept -->
         <itemSuperType rdf:resource="http://kulturarvsdata.se/resurser/EntitySuperType#specTyp" />
         <!--Objekttyp underordnad itemSuperType, till exempel person eller byggnad -->
         <itemType rdf:resource="http://kulturarvsdata.se/resurser/EntityType#specTyp" />
         <!-- Om det finns en klassifikationsresurs (centralt eller lokalt): -->
-        <itemClass rdf:resource="http://kulturarvsdata.se/resurser/EntityClass/outline#class1" />
-        <itemClass rdf:resource="http://mydomain.se/resurser/EntityClass/otherHierarchy#class2" />
+        <itemClass rdf:resource="http://kulturarvsdata.se/resurser/EntityClass/outline#class1"/>
+        <itemClass rdf:resource="http://kulturarvsdata.se/resurser/EntityClass/outline#class2" />
         <!-- Om det _inte_ finns en klassifikationsresurs: -->
         <itemClassName>Klass eller kategori 1</itemClassName>
         <itemClassName>Klass eller kategori 2</itemClassName>

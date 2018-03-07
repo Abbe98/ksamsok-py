@@ -6,28 +6,6 @@ from .utils import validate_request
 from .utils import valid_http_status
 
 class Record:
-    raw_rdf = None
-
-    meta = {}
-
-    uri = None
-    url = None
-    museumdat = None
-    thumbnail = None
-    super_type = None
-    type = None
-    label = None
-
-    collections = list()
-    themes = list()
-    subjects = list()
-    media_types = list()
-    classes = list()
-    class_names = list()
-    titles = list()
-    key_words = list()
-    motive_key_words = list()
-
     @classmethod
     def from_file(cls, filepath):
         with open(filepath, 'r') as file:
@@ -47,6 +25,28 @@ class Record:
         return cls(r.text)
 
     def __init__(self, record):
+        self.raw_rdf = None
+
+        self.meta = {}
+
+        self.uri = None
+        self.url = None
+        self.museumdat = None
+        self.thumbnail = None
+        self.super_type = None
+        self.type = None
+        self.label = None
+
+        self.collections = list()
+        self.themes = list()
+        self.subjects = list()
+        self.media_types = list()
+        self.classes = list()
+        self.class_names = list()
+        self.titles = list()
+        self.key_words = list()
+        self.motive_key_words = list()
+
         self.raw_rdf = record
         self.parse()
 
@@ -79,10 +79,10 @@ class Record:
         url_pattern = re.compile(r'<{0}url>(.+?)<\/{0}url>'.format(ksamsok_ns))
         museumdat_pattern = re.compile(r'<{0}museumdatUrl>(.+?)<\/{0}museumdatUrl>'.format(ksamsok_ns))
         thumbnail_pattern = re.compile(r'<{0}thumbnail>(.+?)<\/{0}thumbnail>'.format(ksamsok_ns))
-        super_type_pattern = re.compile(r'<{0}itemSuperType rdf:resource="(.+?)"(?:\s)\/>'.format(ksamsok_ns))
-        type_pattern = re.compile(r'<{0}itemType rdf:resource="(.+?)"(?:\s)\/>'.format(ksamsok_ns))
+        super_type_pattern = re.compile(r'<{0}itemSuperType rdf:resource="(.+?)"(?:|\s)\/>'.format(ksamsok_ns))
+        type_pattern = re.compile(r'<{0}itemType rdf:resource="(.+?)"(?:|\s)\/>'.format(ksamsok_ns))
         label_pattern = re.compile(r'<{0}itemLabel>(.+?)<\/{0}itemLabel>'.format(ksamsok_ns))
-        data_quality_pattern = re.compile(r'<{0}dataQuality rdf:resource="(.+?)"(?:\s)\/>'.format(ksamsok_ns))
+        data_quality_pattern = re.compile(r'<{0}dataQuality rdf:resource="(.+?)"(?:|\s)\/>'.format(ksamsok_ns))
 
         self.data_quality = self.if_match(data_quality_pattern, self.raw_rdf)
         self.url = self.if_match(url_pattern, self.raw_rdf)
@@ -92,16 +92,43 @@ class Record:
         self.super_type = self.if_match(super_type_pattern, self.raw_rdf)
         self.type = self.if_match(type_pattern, self.raw_rdf)
 
-        collection_pattern = re.compile(r'') #LOOP!
-        theme_pattern = re.compile(r'') #LOOP!
-        subject_pattern = re.compile(r'') #LOOP!
-        media_type_pattern = re.compile(r'') #LOOP!
-        class_pattern = re.compile(r'') #LOOP!
-        class_name_pattern = re.compile(r'') #LOOP!
-        title_pattern = re.compile(r'') #LOOP!
-        description_pattern = re.compile(r'') #LOOP!
-        key_word_pattern = re.compile(r'') #LOOP!
-        motive_key_work_pattern = re.compile(r'') #LOOP!
+        # iterative value patterns
+        collection_pattern = re.compile(r'<{0}collection>(.+?)<\/{0}collection>'.format(ksamsok_ns))
+        theme_pattern = re.compile(r'<{0}theme rdf:resource="(.+?)"(?:|\s)\/>'.format(ksamsok_ns))
+        subject_pattern = re.compile(r'<{0}subject rdf:resource="(.+?)"(?:|\s)\/>'.format(ksamsok_ns))
+        media_type_pattern = re.compile(r'<{0}mediaType rdf:resource="(.+?)"(?:|\s)\/>'.format(ksamsok_ns))
+        class_pattern = re.compile(r'<{0}itemClass rdf:resource="(.+?)"(?:|\s)\/>'.format(ksamsok_ns))
+        class_name_pattern = re.compile(r'<{0}itemClassName>(.+?)<\/{0}itemClassName>'.format(ksamsok_ns))
+        title_pattern = re.compile(r'<{0}itemTitle>(.+?)<\/{0}itemTitle>'.format(ksamsok_ns))
+        key_word_pattern = re.compile(r'<{0}itemKeyWord>(.+?)<\/{0}itemKeyWord>'.format(ksamsok_ns))
+        motive_key_word_pattern = re.compile(r'<{0}itemMotiveWord>(.+?)<\/{0}itemMotiveWord>'.format(ksamsok_ns))
+
+        for c in re.finditer(collection_pattern, self.raw_rdf):
+            self.collections.append(c.group(1))
+
+        for t in re.finditer(theme_pattern, self.raw_rdf):
+            self.themes.append(t.group(1))
+
+        for s in re.finditer(subject_pattern, self.raw_rdf):
+            self.subjects.append(s.group(1))
+
+        for mt in re.finditer(media_type_pattern, self.raw_rdf):
+            self.media_types.append(mt.group(1).split('#')[1])
+
+        for c in re.finditer(class_pattern, self.raw_rdf):
+            self.classes.append(c.group(1))
+
+        for cn in re.finditer(class_name_pattern, self.raw_rdf):
+            self.class_names.append(cn.group(1))
+
+        for t in re.finditer(title_pattern, self.raw_rdf):
+            self.titles.append(t.group(1))
+
+        for kw in re.finditer(key_word_pattern, self.raw_rdf):
+            self.key_words.append(kw.group(1))
+
+        for mkw in re.finditer(motive_key_word_pattern, self.raw_rdf):
+            self.motive_key_words.append(mkw.group(1))
 
     def exists(self):
         # should implement utils.validate_request but from local extracted URI
@@ -122,3 +149,6 @@ class Record:
             return ns + ':'
         else:
             return ''
+
+    def __repr__(self):
+        return '{0} {1}'.format(self.__class__, self.uri)

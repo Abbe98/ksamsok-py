@@ -69,7 +69,7 @@ def test_parse_iterative_values():
     assert record.collections[1] == 'Samlingsnamn2'
 
     assert record.themes[0] == 'http://kulturarvsdata.se/resurser/Theme#tema1'
-    assert record.themes[1] == 'http://kulturarvsdata.se/resurser/Theme#tema2'
+    assert record.themes[1] == 'http://example.com/resurser/Theme#tema2'
 
     assert record.subjects[0] == 'http://kulturarvsdata.se/resurser/Subject#specAmne1'
     assert record.subjects[1] == 'http://kulturarvsdata.se/resurser/Subject#specAmne2'
@@ -93,9 +93,27 @@ def test_parse_iterative_values():
     assert record.motive_key_words[0] == 'Motivord 1'
     assert record.motive_key_words[1] == 'Motivord 2'
 
-
 def test_parse_empty_iterative_values():
-    pass
+    record = Record.from_file('tests/resources/record_with_meta_only.rdf')
+
+    assert isinstance(record.collections, list)
+    assert isinstance(record.themes, list)
+    assert isinstance(record.subjects, list)
+    assert isinstance(record.media_types, list)
+    assert isinstance(record.classes, list)
+    assert isinstance(record.class_names, list)
+    assert isinstance(record.titles, list)
+    assert isinstance(record.key_words, list)
+    assert isinstance(record.motive_key_words, list)
+
+    assert len(record.collections) == 0
+    assert len(record.themes) == 0
+    assert len(record.subjects) == 0
+    assert len(record.media_types) == 0
+    assert len(record.class_names) == 0
+    assert len(record.titles) == 0
+    assert len(record.key_words) == 0
+    assert len(record.motive_key_words) == 0
 
 def test_all_empty_except_uri():
     pass

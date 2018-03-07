@@ -26,7 +26,7 @@ def hints(auth, text, count=5):
 
     terms_pattern = re.compile(r'<term>((.|\n)+?)<\/term>')
     value_pattern = re.compile(r'<value>(.+?)<\/value>')
-    count_pattern = re.compile(r'<count>(\d+)<\/count>')
+    count_pattern = re.compile(r'<count>(\d+?)<\/count>')
 
     result = list()
     for term in re.finditer(terms_pattern, r.text):
