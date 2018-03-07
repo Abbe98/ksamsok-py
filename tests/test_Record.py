@@ -7,8 +7,11 @@ def test_from_string():
     # the fact that it's invalid should be tested by the parser.
     test_string = '<?xml version="1.0" encoding="UTF-8"?><rdf:RDF>dummy</rdf:RDF>'
 
-    record = Record.from_string(test_string)
-    assert record.raw_rdf == test_string
+    with pytest.raises(Exception) as excinfo:
+        record = Record.from_string(test_string)
+        assert record.raw_rdf == test_string
+
+        assert 'Could not parse URI from given record.' in str(excinfo.value)
 
 def test_from_file():
     record = Record.from_file('tests/resources/KBGF051559.rdf')
@@ -24,7 +27,9 @@ def test_from_uri():
     assert record.raw_rdf.endswith('</rdf:RDF>')
 
 def test_not_able_to_parse_error():
-    pass
+    with pytest.raises(Exception) as excinfo:
+        record = Record.from_string('crap')
+        assert 'Could not parse URI from given record.' in str(excinfo.value)
 
 def test_parse_meta_data():
     record = Record.from_file('tests/resources/record_with_meta_only.rdf')
@@ -37,15 +42,15 @@ def test_parse_meta_data():
     assert record.meta['soch_version'] == '1.1'
 
 def test_parse_core_values():
-    record = Record.from_file('')
+    record = Record.from_file('tests/resources/full_record.rdf')
 
-    assert record.uri == ''
-    assert record.url == ''
-    assert record.museumdat == ''
-    assert record.thumbnail == ''
-    assert record.super_type == ''
-    assert record.type == ''
-    assert record.label == ''
+    assert record.uri == 'http://kulturarvsdata.se/inst/service/objekt-id'
+    assert record.url == 'https://example.com/url'
+    assert record.museumdat == 'https://example.com/museumdat'
+    assert record.thumbnail == 'https://example.com/thumbnail.jpg'
+    assert record.super_type == 'http://kulturarvsdata.se/resurser/EntitySuperType#specTyp'
+    assert record.label == 'item label'
+    assert record.type == 'http://kulturarvsdata.se/resurser/EntityType#specTyp'
 
 def test_parse_iterative_values():
     pass

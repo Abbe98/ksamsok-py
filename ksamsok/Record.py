@@ -53,13 +53,22 @@ class Record:
         self.parse()
 
     def parse(self):
+        # get namespace keys
+        ksamsok_ns = self.get_namespace('http://kulturarvsdata.se/ksamsok#')
+
+        uri_pattern = re.compile('<(?:rdf:Description|Entity) rdf:about="(.+?)">')
+        self.uri = self.if_match(uri_pattern, self.raw_rdf)
+        if not self.uri:
+            #TODO better exception
+            raise Exception('Could not parse URI from given record.')
+
         # meta data patterns
-        build_date_pattern = re.compile(r'<ns(?:\d):buildDate>((\d|-)+?)<\/ns(?:\d):buildDate>')
-        created_date_pattern = re.compile(r'<ns(?:\d):createdDate>((\d|-)+?)<\/ns(?:\d):createdDate>')
-        last_changed_date_pattern = re.compile(r'<ns(?:\d):lastChangedDate>((\d|-)+?)<\/ns(?:\d):lastChangedDate>')
-        soch_version_pattern = re.compile(r'<ns(?:\d):ksamsokVersion>((\d|\.)+?)<\/ns(?:\d):ksamsokVersion>')
-        service_name_pattern = re.compile(r'<ns(?:\d):serviceName>(.+?)<\/ns(?:\d):serviceName>')
-        service_org_pattern = re.compile(r'<ns(?:\d):serviceOrganization>(.+?)<\/ns(?:\d):serviceOrganization>')
+        build_date_pattern = re.compile(r'<{0}buildDate>((\d|-)+?)<\/{0}buildDate>'.format(ksamsok_ns))
+        created_date_pattern = re.compile(r'<{0}createdDate>((\d|-)+?)<\/{0}createdDate>'.format(ksamsok_ns))
+        last_changed_date_pattern = re.compile(r'<{0}lastChangedDate>((\d|-)+?)<\/{0}lastChangedDate>'.format(ksamsok_ns))
+        soch_version_pattern = re.compile(r'<{0}ksamsokVersion>((\d|\.)+?)<\/{0}ksamsokVersion>'.format(ksamsok_ns))
+        service_name_pattern = re.compile(r'<{0}serviceName>(.+?)<\/{0}serviceName>'.format(ksamsok_ns))
+        service_org_pattern = re.compile(r'<{0}serviceOrganization>(.+?)<\/{0}serviceOrganization>'.format(ksamsok_ns))
 
         self.meta['build_date'] = self.if_match(build_date_pattern, self.raw_rdf)
         self.meta['created_date'] = self.if_match(created_date_pattern, self.raw_rdf)
@@ -69,22 +78,16 @@ class Record:
         self.meta['service_org'] = self.if_match(service_org_pattern, self.raw_rdf)
 
         # core patterns
-        uri_pattern = re.compile(r'<rdf:Description rdf:about="(.+?)">')
-        url_pattern = re.compile(r'<ns(?:\d):url>(.+?)<\/ns(?:\d):url>')
-        museumdat_pattern = re.compile(r'<ns(?:\d):museumdatUrl>(.+?)<\/ns(?:\d):museumdatUrl>')
-        thumbnail_pattern = re.compile(r'<ns(?:\d):thumbnail>(.+?)<\/ns(?:\d):thumbnail>')
-        super_type_pattern = re.compile(r'<ns(?:\d):itemSuperType rdf:resource="(.+?)"\/>')
-        type_pattern = re.compile(r'<ns(?:\d):itemSuperType rdf:resource="(.+?)"\/>')
-        label_pattern = re.compile(r'<ns(?:\d):itemLabel>(.+?)<\/ns(?:\d):itemLabel>')
-        data_quality_pattern = re.compile(r'<ns(?:\d):dataQuality rdf:resource="(.+?)"\/>')
-
-        self.uri = self.if_match(uri_pattern, self.raw_rdf)
-        if not self.uri:
-            #TODO better exception
-            raise Exception('Could not parse URI from given record')
+        url_pattern = re.compile(r'<{0}url>(.+?)<\/{0}url>'.format(ksamsok_ns))
+        museumdat_pattern = re.compile(r'<{0}museumdatUrl>(.+?)<\/{0}museumdatUrl>'.format(ksamsok_ns))
+        thumbnail_pattern = re.compile(r'<{0}thumbnail>(.+?)<\/{0}thumbnail>'.format(ksamsok_ns))
+        super_type_pattern = re.compile(r'<{0}itemSuperType rdf:resource="(.+?)"(?:\s)\/>'.format(ksamsok_ns))
+        type_pattern = re.compile(r'<{0}itemType rdf:resource="(.+?)"(?:\s)\/>'.format(ksamsok_ns))
+        label_pattern = re.compile(r'<{0}itemLabel>(.+?)<\/{0}itemLabel>'.format(ksamsok_ns))
+        data_quality_pattern = re.compile(r'<{0}dataQuality rdf:resource="(.+?)"(?:\s)\/>'.format(ksamsok_ns))
 
         self.data_quality = self.if_match(data_quality_pattern, self.raw_rdf)
-        self.url = self.if_match(uri_pattern, self.raw_rdf)
+        self.url = self.if_match(url_pattern, self.raw_rdf)
         self.museumdat = self.if_match(museumdat_pattern, self.raw_rdf)
         self.thumbnail = self.if_match(thumbnail_pattern, self.raw_rdf)
         self.label = self.if_match(label_pattern, self.raw_rdf)
@@ -96,7 +99,7 @@ class Record:
         subject_pattern = re.compile(r'') #LOOP!
         media_type_pattern = re.compile(r'') #LOOP!
         class_pattern = re.compile(r'') #LOOP!
-        name_pattern = re.compile(r'') #LOOP!
+        class_name_pattern = re.compile(r'') #LOOP!
         title_pattern = re.compile(r'') #LOOP!
         description_pattern = re.compile(r'') #LOOP!
         key_word_pattern = re.compile(r'') #LOOP!
@@ -113,3 +116,11 @@ class Record:
             return result.group(1)
 
         return None
+
+    def get_namespace(self, target):
+        ns_pattern = re.compile(r'xmlns(?:|:(.+))?="{0}"'.format(target))
+        ns = self.if_match(ns_pattern, self.raw_rdf)
+        if ns:
+            return ns + ':'
+        else:
+            return ''
