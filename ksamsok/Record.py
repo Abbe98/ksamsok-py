@@ -47,6 +47,10 @@ class Record:
         self.key_words = list()
         self.motive_key_words = list()
 
+        self.colors = list()
+        self.techniques = list()
+        self.styles = list()
+
         self.raw_rdf = record
         self.parse()
 
@@ -103,6 +107,10 @@ class Record:
         key_word_pattern = re.compile(r'<{0}itemKeyWord>(.+?)<\/{0}itemKeyWord>'.format(ksamsok_ns))
         motive_key_word_pattern = re.compile(r'<{0}itemMotiveWord>(.+?)<\/{0}itemMotiveWord>'.format(ksamsok_ns))
 
+        color_pattern = re.compile(r'<{0}itemColor>(.+?)<\/{0}itemColor>'.format(ksamsok_ns))
+        technique_pattern = re.compile(r'<{0}itemTechnique>(.+?)<\/{0}itemTechnique>'.format(ksamsok_ns))
+        style_pattern = re.compile(r'<{0}itemStyle>(.+?)<\/{0}itemStyle>'.format(ksamsok_ns))
+
         for c in re.finditer(collection_pattern, self.raw_rdf):
             self.collections.append(c.group(1))
 
@@ -129,6 +137,15 @@ class Record:
 
         for mkw in re.finditer(motive_key_word_pattern, self.raw_rdf):
             self.motive_key_words.append(mkw.group(1))
+
+        for c in re.finditer(color_pattern, self.raw_rdf):
+            self.colors.append(c.group(1))
+
+        for t in re.finditer(technique_pattern, self.raw_rdf):
+            self.techniques.append(t.group(1))
+
+        for s in re.finditer(style_pattern, self.raw_rdf):
+            self.styles.append(s.group(1))
 
     def exists(self):
         # should implement utils.validate_request but from local extracted URI

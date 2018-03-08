@@ -62,9 +62,12 @@
         <itemMotiveWord>Motivord 2</itemMotiveWord>
 
         <itemMaterial rdf:nodeID="mat001" />
-        <itemTechnique>Teknik för att producera objektet, t ex "slipad"</itemTechnique>
-        <itemStyle>Stil som präglar objektet, t ex "gustaviansk"</itemStyle>
-        <itemColor>Färg som präglar objektet, t ex "blå"</itemColor>
+        <itemTechnique>slipad</itemTechnique>
+        <itemTechnique>filad</itemTechnique>
+        <itemStyle>gustaviansk</itemStyle>
+        <itemStyle>abbeiansk</itemStyle>
+        <itemColor>blå</itemColor>
+        <itemColor>vit</itemColor>
 
         <nameAuth>Namnouktoritet - endast för Agenter</nameAuth>
         <nameId>Används endast för Agenter</nameId>

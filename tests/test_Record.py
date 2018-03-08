@@ -64,6 +64,9 @@ def test_parse_iterative_values():
     assert isinstance(record.titles, list)
     assert isinstance(record.key_words, list)
     assert isinstance(record.motive_key_words, list)
+    assert isinstance(record.colors, list)
+    assert isinstance(record.techniques, list)
+    assert isinstance(record.styles, list)
 
     assert record.collections[0] == 'Samlingsnamn1'
     assert record.collections[1] == 'Samlingsnamn2'
@@ -93,6 +96,15 @@ def test_parse_iterative_values():
     assert record.motive_key_words[0] == 'Motivord 1'
     assert record.motive_key_words[1] == 'Motivord 2'
 
+    assert record.colors[0] == 'blå'
+    assert record.colors[1] == 'vit'
+
+    assert record.techniques[0] == 'slipad'
+    assert record.techniques[1] == 'filad'
+
+    assert record.styles[0] == 'gustaviansk'
+    assert record.styles[1] == 'abbeiansk'
+
 def test_parse_empty_iterative_values():
     record = Record.from_file('tests/resources/record_with_meta_only.rdf')
 
@@ -105,6 +117,9 @@ def test_parse_empty_iterative_values():
     assert isinstance(record.titles, list)
     assert isinstance(record.key_words, list)
     assert isinstance(record.motive_key_words, list)
+    assert isinstance(record.colors, list)
+    assert isinstance(record.techniques, list)
+    assert isinstance(record.styles, list)
 
     assert len(record.collections) == 0
     assert len(record.themes) == 0
@@ -114,6 +129,21 @@ def test_parse_empty_iterative_values():
     assert len(record.titles) == 0
     assert len(record.key_words) == 0
     assert len(record.motive_key_words) == 0
+    assert len(record.colors) == 0
+    assert len(record.techniques) == 0
+    assert len(record.styles) == 0
 
 def test_all_empty_except_uri():
-    pass
+    # although not a valid SOCH 1.1 RDF we should be fogiving and support it
+    test_string = '''<?xml version="1.0" encoding="UTF-8"?>
+                    <rdf:RDF 
+                        xmlns:ns1="http://kulturarvsdata.se/ksamsok#" 
+                        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                        <rdf:Description rdf:about="http://kulturarvsdata.se/KBG/photo/KBGF051559">
+                        </rdf:Description>
+                    </rdf:RDF>
+                 '''
+
+    record = Record.from_string(test_string)
+
+    assert record.uri == 'http://kulturarvsdata.se/KBG/photo/KBGF051559'
