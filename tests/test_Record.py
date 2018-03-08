@@ -147,3 +147,40 @@ def test_all_empty_except_uri():
     record = Record.from_string(test_string)
 
     assert record.uri == 'http://kulturarvsdata.se/KBG/photo/KBGF051559'
+
+
+def test_parse_named_nodes():
+    record = Record.from_file('tests/resources/full_record.rdf')
+
+    assert isinstance(record.names, list)
+    assert isinstance(record.specifications, list)
+    assert isinstance(record.descriptions, list)
+    assert isinstance(record.materials, list)
+    assert isinstance(record.numbers, list)
+    assert isinstance(record.measurements, list)
+
+    assert record.measurements[0]['type'] == 'Typ av mått, t ex "längd"'
+    assert record.measurements[0]['unit'] == 'Enhet, t ex "mm"'
+    assert record.measurements[0]['value'] == 'Värde, t ex "23"'
+    assert record.measurements[0]['qualifier'] == 'Specifikation av vad som mäts, t ex "egg", "före konservering"'
+
+    assert record.names[0]['type'] == 'Typ av namn, t ex "sakord"'
+    assert record.names[0]['name'] == 'Etikett som beskriver objektet'
+
+    assert record.names[1]['type'] == 'kul namn'
+    assert record.names[1]['name'] == 'abbe'
+
+    assert record.numbers[0]['type'] == 'Typ av numering, t ex "inventarienummer"'
+    assert record.numbers[0]['number'] == 'Nummer'
+
+    assert record.specifications[0]['type'] == 'Typ av specifikation, t ex "produkttyp" eller "modell"'
+    assert record.specifications[0]['spec'] == 'Modellbeteckning eller liknande'
+
+    assert record.materials[0]['type'] == 'Typ av material, t ex "huvudmaterial" eller "tilläggsmaterial"'
+    assert record.materials[0]['material'] == 'Material, t ex "sten"'
+
+    assert record.descriptions[0]['type'] == 'Typ av beskrivning, t ex "föremålsbeskrivning"'
+    assert record.descriptions[0]['desc'] == 'Beskrivning, även ostrukturerad text för fritextsökning'
+
+def test_parse_blank_nodes():
+    pass

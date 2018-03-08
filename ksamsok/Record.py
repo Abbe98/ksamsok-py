@@ -51,6 +51,13 @@ class Record:
         self.techniques = list()
         self.styles = list()
 
+        self.names = list()
+        self.specifications = list()
+        self.descriptions = list()
+        self.materials = list()
+        self.numbers = list()
+        self.measurements = list()
+
         self.raw_rdf = record
         self.parse()
 
@@ -147,6 +154,32 @@ class Record:
         for s in re.finditer(style_pattern, self.raw_rdf):
             self.styles.append(s.group(1))
 
+        type_pattern = re.compile(r'<{0}type>(.+?)<\/{0}type>'.format(ksamsok_ns))
+
+        measurement_nodes = self.get_nodes('itemMeasurement', 'ItemMeasurement', ksamsok_ns)
+        value_pattern = re.compile(r'<{0}value>(.+?)<\/{0}value>'.format(ksamsok_ns))
+        unit_pattern = re.compile(r'<{0}unit>(.+?)<\/{0}unit>'.format(ksamsok_ns))
+        qualifier_pattern = re.compile(r'<{0}qualifier>(.+?)<\/{0}qualifier>'.format(ksamsok_ns))
+
+        for node in measurement_nodes:
+            measurement = {}
+            measurement['type'] = self.if_match(type_pattern, node)
+            measurement['value'] = self.if_match(value_pattern, node)
+            measurement['unit'] = self.if_match(unit_pattern, node)
+            measurement['qualifier'] = self.if_match(qualifier_pattern, node)
+
+            self.measurements.append(measurement)
+
+        name_nodes = self.get_nodes('itemName', 'ItemName', ksamsok_ns)
+        name_pattern = re.compile(r'<{0}name>(.+?)<\/{0}name>'.format(ksamsok_ns))
+
+        for node in name_nodes:
+            name = {}
+            name['type'] = self.if_match(type_pattern, node)
+            name['name'] = self.if_match(name_pattern, node)
+
+            self.names.append(name)
+
     def exists(self):
         # should implement utils.validate_request but from local extracted URI
         raise NotImplementedError
@@ -158,6 +191,17 @@ class Record:
             return result.group(1)
 
         return None
+
+    def get_nodes(self, pointer, tag, ksamsok_ns):
+        result = list()
+
+        node_pointer_pattern = re.compile(r'<{1}{0} rdf:nodeID="(.+)"(?:|\s)\/>'.format(pointer, ksamsok_ns))
+        for node_id in re.finditer(node_pointer_pattern, self.raw_rdf):
+            node_pattern = re.compile(r'<(?:{1}{0}|rdf:Description) rdf:nodeID="{2}">((?:.|\n)+?)<\/(?:{1}{0}|rdf:Description)>'.format(tag, ksamsok_ns, node_id.group(1)))
+            for node in re.finditer(node_pattern, self.raw_rdf):
+                result.append(node.group(1))
+
+        return result
 
     def get_namespace(self, target):
         ns_pattern = re.compile(r'xmlns(?:|:(.+))?="{0}"'.format(target))

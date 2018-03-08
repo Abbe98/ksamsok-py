@@ -51,6 +51,7 @@
         <itemLicenseUrl rdf:resource="http://creativecommons.org/licenses/by/2.5/se/" />
         <!-- eller andra cc-licenser än "by" eller http://creativecommons.org/publicdomain/mark/1.0/ -->
         <itemName rdf:nodeID="name001" />
+        <itemName rdf:nodeID="name002" />
         <itemLabel>item label</itemLabel>
         <itemSpecification rdf:nodeID="spec001" />
         <itemTitle>Titel eller verksnamn 1</itemTitle>
@@ -242,6 +243,10 @@
         <type>Typ av namn, t ex "sakord"</type>
         <name>Etikett som beskriver objektet</name>
     </ItemName>
+    <ItemName rdf:nodeID="name002">
+        <type>kul namn</type>
+        <name>abbe</name>
+    </ItemName>
     <ItemSpecification rdf:nodeID="spec001">
         <type>Typ av specifikation, t ex "produkttyp" eller "modell"</type>
         <spec>Modellbeteckning eller liknande</spec>
@@ -258,6 +263,6 @@
         <type>Typ av mått, t ex "längd"</type>
         <value>Värde, t ex "23"</value>
         <unit>Enhet, t ex "mm"</unit>
-        <qualifier>Specifikation av vad som mäts, t ex "egg" eller i vilket läge det mäts, t ex "före konservering"</qualifier>
+        <qualifier>Specifikation av vad som mäts, t ex "egg", "före konservering"</qualifier>
     </ItemMeasurement>
 </rdf:RDF>
