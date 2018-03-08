@@ -172,13 +172,48 @@ class Record:
 
         name_nodes = self.get_nodes('itemName', 'ItemName', ksamsok_ns)
         name_pattern = re.compile(r'<{0}name>(.+?)<\/{0}name>'.format(ksamsok_ns))
-
         for node in name_nodes:
             name = {}
             name['type'] = self.if_match(type_pattern, node)
             name['name'] = self.if_match(name_pattern, node)
 
             self.names.append(name)
+
+        number_nodes = self.get_nodes('itemNumber', 'ItemNumber', ksamsok_ns)
+        number_pattern = re.compile(r'<{0}number>(.+?)<\/{0}number>'.format(ksamsok_ns))
+        for node in number_nodes:
+            number = {}
+            number['type'] = self.if_match(type_pattern, node)
+            number['number'] = self.if_match(number_pattern, node)
+
+            self.numbers.append(number)
+
+        spec_nodes = self.get_nodes('itemSpecification', 'ItemSpecification', ksamsok_ns)
+        spec_pattern = re.compile(r'<{0}spec>(.+?)<\/{0}spec>'.format(ksamsok_ns))
+        for node in spec_nodes:
+            spec = {}
+            spec['type'] = self.if_match(type_pattern, node)
+            spec['spec'] = self.if_match(spec_pattern, node)
+
+            self.specifications.append(spec)
+
+        material_nodes = self.get_nodes('itemMaterial', 'ItemMaterial', ksamsok_ns)
+        material_pattern = re.compile(r'<{0}material>(.+?)<\/{0}material>'.format(ksamsok_ns))
+        for node in material_nodes:
+            material = {}
+            material['type'] = self.if_match(type_pattern, node)
+            material['material'] = self.if_match(material_pattern, node)
+
+            self.materials.append(material)
+
+        desc_nodes = self.get_nodes('itemDescription', 'ItemDescription', ksamsok_ns)
+        desc_pattern = re.compile(r'<{0}desc>(.+?)<\/{0}desc>'.format(ksamsok_ns))
+        for node in desc_nodes:
+            desc = {}
+            desc['type'] = self.if_match(type_pattern, node)
+            desc['desc'] = self.if_match(desc_pattern, node)
+
+            self.descriptions.append(desc)
 
     def exists(self):
         # should implement utils.validate_request but from local extracted URI
