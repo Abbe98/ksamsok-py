@@ -183,4 +183,15 @@ def test_parse_named_nodes():
     assert record.descriptions[0]['desc'] == 'Beskrivning, även ostrukturerad text för fritextsökning'
 
 def test_parse_blank_nodes():
-    pass
+    record = Record.from_file('tests/resources/raa_fmi_10024000190001.rdf')
+
+    assert record.names[0]['type'] == 'Lämningstyp'
+    assert record.names[0]['name'] == 'Fångstgård'
+    
+    assert record.specifications[0]['type'] == 'Anmärkning'
+    assert record.specifications[0]['spec'] == 'Detta kan vara en fornlämning.'
+
+    assert record.descriptions[0]['type'] == 'Beskrivning'
+    assert record.descriptions[0]['desc'] == 'Varggård'
+    assert record.descriptions[1]['type'] == 'Orientering'
+    assert record.descriptions[1]['desc'] == 'Ca 10 m Ö om vägen Giboda-Vavd.'
