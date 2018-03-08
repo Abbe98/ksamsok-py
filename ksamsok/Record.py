@@ -239,7 +239,7 @@ class Record:
         return result
 
     def get_namespace(self, target):
-        ns_pattern = re.compile(r'xmlns(?:|:(.+))?="{0}"'.format(target))
+        ns_pattern = re.compile(r'xmlns(?:|:((?:\w|\d)+))?="{0}"'.format(target))
         ns = self.if_match(ns_pattern, self.raw_rdf)
         if ns:
             return ns + ':'
