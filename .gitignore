@@ -141,3 +141,4 @@ $RECYCLE.BIN/
 # SOCH
 
 .pytest_cache
+.vscode
