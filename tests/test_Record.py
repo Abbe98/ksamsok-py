@@ -207,9 +207,9 @@ def test_parse_images():
     assert record.images[0]['copyright'] == 'Organisation/Person som äger bilden'
     assert record.images[0]['license'] == 'http://kulturarvsdata.se/resurser/License#specLicens'
     assert record.images[0]['license_url'] == 'http://creativecommons.org/licenses/by/2.5/se/'
-    assert len(record.images[0]['motive_words']) == 2
-    assert record.images[0]['motive_words'][0] == 'Motivord'
-    assert record.images[0]['motive_words'][1] == 'Fler motivord'
+    assert len(record.images[0]['motive_key_words']) == 2
+    assert record.images[0]['motive_key_words'][0] == 'Motivord'
+    assert record.images[0]['motive_key_words'][1] == 'Fler motivord'
 
     assert record.images[1]['media_type'] == 'specMediatyp2'
     assert record.images[1]['thumbnail'] == 'Länk till källa för bilden 2'
@@ -219,6 +219,6 @@ def test_parse_images():
     assert record.images[1]['copyright'] == 'Organisation/Person som äger bilden 2'
     assert record.images[1]['license'] == 'http://kulturarvsdata.se/resurser/License#specLicens1'
     assert record.images[1]['license_url'] == 'http://creativecommons.org/licenses/by/2.5/no/'
-    assert len(record.images[1]['motive_words']) == 2
-    assert record.images[1]['motive_words'][0] == 'Motivord 1'
-    assert record.images[1]['motive_words'][1] == 'Fler motivord'
+    assert len(record.images[1]['motive_key_words']) == 2
+    assert record.images[1]['motive_key_words'][0] == 'Motivord 1'
+    assert record.images[1]['motive_key_words'][1] == 'Fler motivord'
