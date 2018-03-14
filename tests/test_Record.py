@@ -28,7 +28,7 @@ def test_from_uri():
 
 def test_not_able_to_parse_error():
     with pytest.raises(Exception) as excinfo:
-        record = Record.from_string('crap')
+        Record.from_string('crap')
         assert 'Could not parse URI from given record.' in str(excinfo.value)
 
 def test_parse_meta_data():
