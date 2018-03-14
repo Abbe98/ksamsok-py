@@ -59,6 +59,7 @@ class Record:
         self.measurements = list()
 
         self.images = list()
+        self.media = list()
 
         self.raw_rdf = record
         self.parse()
@@ -246,6 +247,27 @@ class Record:
                 image['motive_key_words'].append(mkw.group(1))
 
             self.images.append(image)
+
+        media_nodes = self.get_nodes('media', 'Media', ksamsok_ns)
+        # media_type_pattern
+        # byline_pattern
+        # copyright_pattern
+        # license_pattern
+        # license_url_pattern
+        link_pattern = re.compile(r'<{0}link>(.+?)<\/{0}link>'.format(ksamsok_ns))
+
+        for node in media_nodes:
+            media = {}
+            media['link'] = self.if_match(link_pattern, node)
+            media['byline'] = self.if_match(byline_pattern, node)
+            media['copyright'] = self.if_match(copyright_pattern, node)
+            media['license'] = self.if_match(license_pattern, node)
+            media['license_url'] = self.if_match(license_url_pattern, node)
+
+            media['media_type'] = self.if_match(media_type_pattern, node)
+            media['media_type'] = media['media_type'].split('#')[1] if media['media_type'] else None
+
+            self.media.append(media)
 
     def exists(self):
         # should implement utils.validate_request but from local extracted URI
