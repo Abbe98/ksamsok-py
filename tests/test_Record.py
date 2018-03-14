@@ -195,3 +195,30 @@ def test_parse_blank_nodes():
     assert record.descriptions[0]['desc'] == 'Varggård'
     assert record.descriptions[1]['type'] == 'Orientering'
     assert record.descriptions[1]['desc'] == 'Ca 10 m Ö om vägen Giboda-Vavd.'
+
+def test_parse_images():
+    record = Record.from_file('tests/resources/full_record.rdf')
+
+    assert record.images[0]['media_type'] == 'specMediatyp'
+    assert record.images[0]['thumbnail'] == 'Länk till källa för bilden 0'
+    assert record.images[0]['lowres'] == 'Länk till källa för bilden 1'
+    assert record.images[0]['highres'] == 'Länk till källa för bilden 2'
+    assert record.images[0]['byline'] == 'Bildttext som ska innehålla fotograf och organisation'
+    assert record.images[0]['copyright'] == 'Organisation/Person som äger bilden'
+    assert record.images[0]['license'] == 'http://kulturarvsdata.se/resurser/License#specLicens'
+    assert record.images[0]['license_url'] == 'http://creativecommons.org/licenses/by/2.5/se/'
+    assert len(record.images[0]['motive_words']) == 2
+    assert record.images[0]['motive_words'][0] == 'Motivord'
+    assert record.images[0]['motive_words'][1] == 'Fler motivord'
+
+    assert record.images[1]['media_type'] == 'specMediatyp2'
+    assert record.images[1]['thumbnail'] == 'Länk till källa för bilden 2'
+    assert record.images[1]['lowres'] == 'Länk till källa för bilden 2'
+    assert record.images[1]['highres'] == 'Länk till källa för bilden 2'
+    assert record.images[1]['byline'] == 'Bildttext som ska innehålla fotograf och organisation 2'
+    assert record.images[1]['copyright'] == 'Organisation/Person som äger bilden 2'
+    assert record.images[1]['license'] == 'http://kulturarvsdata.se/resurser/License#specLicens1'
+    assert record.images[1]['license_url'] == 'http://creativecommons.org/licenses/by/2.5/no/'
+    assert len(record.images[1]['motive_words']) == 2
+    assert record.images[1]['motive_words'][0] == 'Motivord 1'
+    assert record.images[1]['motive_words'][1] == 'Fler motivord'
