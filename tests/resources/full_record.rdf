@@ -249,6 +249,24 @@
         <mediaLicense rdf:resource="http://kulturarvsdata.se/resurser/License#specLicens1" />
         <mediaLicenseUrl rdf:resource="http://creativecommons.org/licenses/by/2.5/no/" />
     </Image>
+    <media rdf:nodeID="med01" />
+    <media rdf:nodeID="med02"/>
+    <Media rdf:nodeID="med01">
+        <mediaType rdf:resource="http://kulturarvsdata.se/resurser/MediaType#specMediatyp1"/>
+        <byline>Text som ska innehålla skapare och organisation 1</byline>
+        <copyright>Organisation/Person som äger filen 1</copyright>
+        <link>https://example.com/example.mp4</link>
+        <mediaLicense rdf:resource="http://kulturarvsdata.se/resurser/License#specLicens1" />
+        <mediaLicenseUrl rdf:resource="http://creativecommons.org/licenses/by/2.5/no/" />
+    </Media>
+    <Media rdf:nodeID="med02">
+        <mediaType rdf:resource="http://kulturarvsdata.se/resurser/MediaType#specMediatyp2"/>
+        <byline>Text som ska innehålla skapare och organisation 2</byline>
+        <copyright>Organisation/Person som äger filen 2</copyright>
+        <link>https://example.com/example.mp3</link>
+        <mediaLicense rdf:resource="http://kulturarvsdata.se/resurser/License#specLicens2"/>
+        <mediaLicenseUrl rdf:resource="http://creativecommons.org/licenses/by/2.5/nn/" />
+    </Media>
     <ItemNumber rdf:nodeID="num001">
         <type>Typ av numering, t ex "inventarienummer"</type>
         <number>Nummer</number>

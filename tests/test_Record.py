@@ -222,3 +222,20 @@ def test_parse_images():
     assert len(record.images[1]['motive_key_words']) == 2
     assert record.images[1]['motive_key_words'][0] == 'Motivord 1'
     assert record.images[1]['motive_key_words'][1] == 'Fler motivord'
+
+def test_parse_media():
+    record = Record.from_file('tests/resources/full_record.rdf')
+
+    assert record.media[0]['media_type'] == 'specMediatyp1'
+    assert record.media[0]['byline'] == 'Text som ska innehålla skapare och organisation 1'
+    assert record.media[0]['copyright'] == 'Organisation/Person som äger filen 1'
+    assert record.media[0]['link'] == 'https://example.com/example.mp4'
+    assert record.media[0]['license'] == 'http://kulturarvsdata.se/resurser/License#specLicens1'
+    assert record.media[0]['license_url'] == 'http://creativecommons.org/licenses/by/2.5/no/'
+
+    assert record.media[1]['media_type'] == 'specMediatyp2'
+    assert record.media[1]['byline'] == 'Text som ska innehålla skapare och organisation 2'
+    assert record.media[1]['copyright'] == 'Organisation/Person som äger filen 2'
+    assert record.media[1]['link'] == 'https://example.com/example.mp3'
+    assert record.media[1]['license'] == 'http://kulturarvsdata.se/resurser/License#specLicens2'
+    assert record.media[1]['license_url'] == 'http://creativecommons.org/licenses/by/2.5/nn/'
