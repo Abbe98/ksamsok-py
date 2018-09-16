@@ -4,4 +4,4 @@ KSamsök-PY is a Python library for the [K-Samsök(SOCH) API](http://www.ksamsok
 
 ## 2.0
 
-Heads up this is the source code for the unreleased 1.0 version. Documentation and code for 0.* can be found on the `0.--series` branch! 0.* versions are still maintained and there is no plans on deprecating them.
+*Heads up!* This is the source code for the unreleased 2.0 version. Documentation and code for 0.* can be found on the `0.--series` branch! 0.* versions are still maintained and there is no plans on deprecating them.
