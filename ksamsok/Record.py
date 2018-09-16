@@ -249,6 +249,7 @@ class Record:
             self.images.append(image)
 
         media_nodes = self.get_nodes('media', 'Media', ksamsok_ns)
+        # reused patterns...
         # media_type_pattern
         # byline_pattern
         # copyright_pattern
