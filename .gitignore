@@ -87,6 +87,9 @@ ENV/
 # Rope project settings
 .ropeproject
 
+# Test
+.pytest_cache
+
 # =========================
 # Operating System Files
 # =========================
