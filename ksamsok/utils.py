@@ -54,16 +54,6 @@ def kulturarvsdata_to_id(kulturarvsdata):
 
     return r_id
 
-def kill_xml_namespaces(self, xml_string):
-    xml_string = re.sub('pres:', 'pres_', xml_string)
-    xml_string = re.sub('georss:', 'georss_', xml_string)
-    xml_string = re.sub('gml:', 'gml_', xml_string)
-    xml_string = re.sub('geoF:', 'geoF_', xml_string)
-    xml_string = re.sub('rel:', 'rel_', xml_string)
-    xml_string = re.sub('xmlns:', 'xmlns_', xml_string)
-
-    return xml_string
-
 def province_uri_to_string(uri):
     if uri.endswith('Bl'): return 'Blekinge'
     if uri.endswith('Bo'): return 'Bohuslän'
