@@ -216,17 +216,18 @@ class Record:
             self.descriptions.append(desc)
 
     def exists(self):
-        # should implement utils.validate_request but from local extracted URI
-        raise NotImplementedError
+        #TODO needs test
+        return validate_request(self.uri)
 
+    # regex helper
     def if_match(self, pattern, target):
-        # regex helper
         result = pattern.search(target)
         if result:
             return result.group(1)
 
         return None
 
+    # regex helper
     def get_nodes(self, pointer, tag, ksamsok_ns):
         result = list()
 
@@ -238,6 +239,7 @@ class Record:
 
         return result
 
+    # regex helper
     def get_namespace(self, target):
         ns_pattern = re.compile(r'xmlns(?:|:((?:\w|\d)+))?="{0}"'.format(target))
         ns = self.if_match(ns_pattern, self.raw_rdf)
