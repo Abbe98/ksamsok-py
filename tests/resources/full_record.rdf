@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF 
+    xmlns="http://kulturarvsdata.se/ksamsok#" 
+    xmlns:foaf="http://xmlns.com/foaf/0.1/#" 
+    xmlns:geoF="http://www.mindswap.org/2003/owl/geo/geoFeatures20040307.owl#" 
+    xmlns:owl="http://www.w3.org/2002/07/owl#" 
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+    xmlns:time="http://www.w3.org/2006/time#" 
+    xmlns:georss="http://www.georss.org/georss" 
+    xmlns:gml="http://www.opengis.net/gml" 
+    xmlns:bio="http://purl.org/vocab/bio/0.1/" 
+    xmlns:crm="http://www.cidoc-crm.org/rdfs/cidoc-crm#">
+    <!-- här kommer nu institutionens alla objekt (resp alla nyligen ändrade objekt) -->
+    <Entity rdf:about="http://kulturarvsdata.se/inst/service/objekt-id">
+        <ksamsokVersion>1.1</ksamsokVersion>
+        <serviceName>Namn på tjänsten som data levereras från, t ex "object"</serviceName>
+        <serviceOrganization>Institutionen som levererar tjänsten, t ex "shm" eller "raä".</serviceOrganization>
+        <buildDate>Tid när objektinformationen genererades (skördades)</buildDate>
+        <!--Format: YYYY-MM-DD (exempel 2008-09-15) enligt ISO 8601 -->
+        <collection>Samlingsnamn1</collection>
+        <collection>Samlingsnamn2</collection>
+        <theme rdf:resource="http://kulturarvsdata.se/resurser/Theme#tema1"/>
+        <theme rdf:resource="http://example.com/resurser/Theme#tema2" />
+        <createdDate>Skapad datum</createdDate>
+        <lastChangedDate>Senast ändrad</lastChangedDate>
+        <!--Format: YYYY-MM-DD (exempel 2008-09-15) enligt ISO 8601 -->
+        <url>https://example.com/url</url>
+        <museumdatUrl>https://example.com/museumdat</museumdatUrl>
+        <thumbnail>https://example.com/thumbnail.jpg</thumbnail>
+        <!--ämnesspecifikation, t ex "Arkeologi" -->
+        <subject rdf:resource="http://kulturarvsdata.se/resurser/Subject#specAmne1" />
+        <subject rdf:resource="http://kulturarvsdata.se/resurser/Subject#specAmne2"/>
+        <subject rdf:resource="http://kulturarvsdata.se/resurser/Subject#specAmne3"/>
+        <!--Mediatyp enl MIME, t ex "image/gif" -->
+        <mediaType rdf:resource="http://kulturarvsdata.se/resurser/MediaType#specMediatyp1" />
+        <mediaType rdf:resource="http://kulturarvsdata.se/resurser/MediaType#specMediatyp2"/>
+        <dataQuality rdf:resource="http://kulturarvsdata.se/resurser/DataQuality#specKvalitet" />
+        <!--Övernivå till objekttyp, agent, fysiskt ting, händelse eller koncept -->
+        <itemSuperType rdf:resource="http://kulturarvsdata.se/resurser/EntitySuperType#specTyp" />
+        <!--Objekttyp underordnad itemSuperType, till exempel person eller byggnad -->
+        <itemType rdf:resource="http://kulturarvsdata.se/resurser/EntityType#specTyp" />
+        <!-- Om det finns en klassifikationsresurs (centralt eller lokalt): -->
+        <itemClass rdf:resource="http://kulturarvsdata.se/resurser/EntityClass/outline#class1"/>
+        <itemClass rdf:resource="http://kulturarvsdata.se/resurser/EntityClass/outline#class2" />
+        <!-- Om det _inte_ finns en klassifikationsresurs: -->
+        <itemClassName>Klass eller kategori 1</itemClassName>
+        <itemClassName>Klass eller kategori 2</itemClassName>
+        <itemLicense rdf:resource="http://kulturarvsdata.se/resurser/License#specLicens" />
+        <!-- se http://kulturarvsdata.se/resurser/license/license.rdf -->
+        <itemLicenseUrl rdf:resource="http://creativecommons.org/licenses/by/2.5/se/" />
+        <!-- eller andra cc-licenser än "by" eller http://creativecommons.org/publicdomain/mark/1.0/ -->
+        <itemName rdf:nodeID="name001" />
+        <itemName rdf:nodeID="name002" />
+        <itemLabel>item label</itemLabel>
+        <itemSpecification rdf:nodeID="spec001" />
+        <itemTitle>Titel eller verksnamn 1</itemTitle>
+        <itemTitle>Titel eller verksnamn 2</itemTitle>
+        <itemDescription rdf:nodeID="desc001" />
+        <itemKeyWord>Nyckelord 1</itemKeyWord>
+        <itemKeyWord>Nyckelord 2</itemKeyWord>
+        <itemMotiveWord>Motivord 1</itemMotiveWord>
+        <itemMotiveWord>Motivord 2</itemMotiveWord>
+
+        <itemMaterial rdf:nodeID="mat001" />
+        <itemTechnique>slipad</itemTechnique>
+        <itemTechnique>filad</itemTechnique>
+        <itemStyle>gustaviansk</itemStyle>
+        <itemStyle>abbeiansk</itemStyle>
+        <itemColor>blå</itemColor>
+        <itemColor>vit</itemColor>
+
+        <nameAuth>Namnouktoritet - endast för Agenter</nameAuth>
+        <nameId>Används endast för Agenter</nameId>
+        <name>Namn - endast för Agenter</name>
+        <name>Alternativa namn - endast för Agenter</name>
+        <firstName>Förnamn, tilltalsnamn - används endast för Agenter</firstName>
+        <surname>Efternamn - används endast för Agenter</surname>
+        <gender>male eller female - används endast för Agenter</gender>
+        <title>Används endast för Agenter</title>
+        <organization>Används endast för Agenter</organization>
+
+        <itemNumber rdf:nodeID="num001" />
+        <itemMeasurement rdf:nodeID="meas001" />
+        <context rdf:nodeID="ctx001" />
+        <!-- Obs: isRelatedTo är defaulttyp för relationer, använd hellre någon 
+			av de fördefinierade -->
+        <isRelatedTo>URI till relaterat objekt</isRelatedTo>
+        <!-- typerna på kulturarvsdata.se/relationstyper -->
+        <containsInformationAbout>Subjektet innehåller information om objektet</containsInformationAbout>
+        <containsObject>Subjektet innehåller objektet</containsObject>
+        <isPartOf>Är en del av, invers till containsObject</isPartOf>
+        <isFoundIn>Är funnen i ett annat objekt, specialisering av isPartOf</isFoundIn>
+        <hasBeenUsedIn>Har brukats i</hasBeenUsedIn>
+        <hasChild>Överordnad</hasChild>
+        <hasParent>Underordnad</hasParent>
+        <hasFind>En fyndplats som har ett fynd</hasFind>
+        <hasImage>Bild som föreställer annat också eller är tagen från subjektet, t ex från en kyrka</hasImage>
+        <hasObjectExample>Urval av föremål som presenterar platsen på ett beskrivande sätt</hasObjectExample>
+        <hasPart>Består av (essentiella delar av en helhet)</hasPart>
+        <isDescribedBy>Beskrivs av, t ex en litteraturreferens</isDescribedBy>
+        <visualizes>För typen "Objektavbildning": URI till motivet</visualizes>
+        <isVisualizedBy>URI till en objektavbildning</isVisualizedBy>
+        <isMentionedBy>URI till objekt som detta objekt nämns av.</isMentionedBy>
+        <mentions>URI till objekt som detta objekt nämner.</mentions>
+        <owl:sameAs>Använd denna standard om objektet har flera RDF-representationer</owl:sameAs>
+        <bio:child>URI till objekt som är agent och barn. Används endast för Agenter.</bio:child>
+        <bio:parent>URI till objekt som är agent och förälder. Används endast för Agenter.</bio:parent>
+        <bio:mother>URI till objekt som är agent och mor. Används endast för Agenter.</bio:mother>
+        <bio:father>URI till objekt som är agent och far. Används endast för Agenter.</bio:father>
+        <crm:P12F.occurred_in_the_presence_of>URI till objekt som händelsen skedde i närvaro av. Används endast för Händelse.</crm:P12F.occurred_in_the_presence_of>
+        <crm:P11B.participated_in>URI till objekt av typen Händelse. Används endast av Agenter.</crm:P11B.participated_in>
+        <crm:P12B.was_present_at>URI till objekt som var närvarande. Används endast för Händelse.</crm:P12B.was_present_at>
+        <crm:P107B.is_current_or_former_member_of>URI till objekt som är en organisation. Används endast för Agenter.</crm:P107B.is_current_or_former_member_of>
+        <crm:P107F.has_current_or_former_member>URI till objekt som är en person. Används endast för Agenter.</crm:P107F.has_current_or_former_member>
+        <crm:P11F.had_participant>URI till objekt av typen person. Används endast av Händelse.</crm:P11F.had_participant>
+        <crm:P11B.participated_in>URI till objekt av typen Händelse.</crm:P11B.participated_in>
+        <image rdf:nodeID="im001" />
+        <image rdf:nodeID="im002" />
+    </Entity>
+    <Context rdf:nodeID="ctx001">
+        <!-- create, interact eller cease -->
+        <contextSuperType rdf:resource="http://kulturarvsdata.se/resurser/ContextSuperType#specContextSuperType" />
+        <contextType rdf:resource="http://kulturarvsdata.se/resurser/ContextType#specKontexttyp" />
+        <!-- tidsrelaterade element följer -->
+        <fromTime>Tidpunkt eller start på tidsintervall. ISO 8601 men även "x f.kr" och "y e.kr".</fromTime>
+        <toTime>Tidpunkt eller slut på tidsintervall ISO 8601 men även "x f.kr" och "y e.kr".</toTime>
+        <fromPeriodName>Tidpunkt eller start på tidsintervall</fromPeriodName>
+        <toPeriodName>Tidpunkt eller slut på tidsintervall</toPeriodName>
+        <fromPeriodId>Tidpunkt eller start på tidsintervall (kod)</fromPeriodId>
+        <toPeriodId>Tidpunkt eller slut på tidsintervall (kod)</toPeriodId>
+        <periodAuth>Auktoritet för perioder, gärna SHM</periodAuth>
+        <eventName>Namn på händelse</eventName>
+        <eventAuth>Auktoritet för händelser</eventAuth>
+        <timeText>Ostrukturerade tidssträngar för fritextsökning</timeText>
+        <!-- platsrelaterade element följer -->
+        <continentName>Kontinent</continentName>
+        <!-- såväl koder som namn kan levereras från lokal nod för geografiska data -->
+        <country rdf:resource="http://kulturarvsdata.se/resurser/aukt/geo/country#landskod" />
+        <geoF:county rdf:resource="http://kulturarvsdata.se/resurser/aukt/geo/county#länskod" />
+        <geoF:province rdf:resource="http://kulturarvsdata.se/resurser/aukt/geo/province#landskapskod" />
+        <geoF:municipality rdf:resource="http://kulturarvsdata.se/resurser/aukt/geo/municipality#kommunkod" />
+        <geoF:parish rdf:resource="http://kulturarvsdata.se/resurser/aukt/geo/parish#sockenkod" />
+        <countryName>Landsnamn</countryName>
+        <countyName>Länsnamn</countyName>
+        <provinceName>Landskapsnamn</provinceName>
+        <municipalityName>Kommunnamn</municipalityName>
+        <parishName>Sockennamn</parishName>
+        <placeName>Annat platsnamn eller ostrukturerat platsnamn för fritextsökning</placeName>
+        <cadastralUnit>Fastighetsbeteckning</cadastralUnit>
+        <placeTermId>Plats-ID hos auktoritet</placeTermId>
+        <placeTermAuth>Auktoritet för plats-ID</placeTermAuth>
+        <coordinates rdf:parseType="Literal">
+            <gml:Point 
+                xmlns:gml="http://www.opengis.net/gml" srsName="SDO:4326">
+                <gml:coordinates cs="," decimal="." ts=" ">11.3,58.6</gml:coordinates>
+            </gml:Point>
+        </coordinates>
+        <!-- person/org-relaterade element följer -->
+        <foaf:firstName>Förnamn</foaf:firstName>
+        <foaf:surname>Efternamn</foaf:surname>
+        <foaf:fullName>Förnamn + blanksteg + Efternamn</foaf:fullName>
+        <foaf:name>Allmänt ostrukturerat namn för fritextsökning</foaf:name>
+        <foaf:organization>Organisationsnamn</foaf:organization>
+        <foaf:gender>Kvinna eller man, anges som "K" eller "M"</foaf:gender>
+        <foaf:title>Titel, t ex "Disponent"</foaf:title>
+        <nameId>Auktoriserat ID</nameId>
+        <nameAuth>Auktoritet för namn, gärna KB</nameAuth>
+        <!-- relationer till Agenter -->
+        <client rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <composer rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <author rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <architect rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <inventor rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <scenographer rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <designer rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <producer rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <organizer rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <director rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <photographer rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <painter rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <builder rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <masterBuilder rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <constructionClient rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <engraver rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <mintmaster rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <artist rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <designEngineer rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <carpenter rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <mason rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <technician rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <publisher rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <publicist rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <musician rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <actorActress rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <printer rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <signer rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <finder rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <abandonee rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <intermediary rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <buyer rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <seller rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <generalAgent rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <donor rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <depositor rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <reseller rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <inventoryTaker rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <excavator rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <examinator rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <conservator rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <archiveContributor rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <interviewer rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <informant rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <patentHolder rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <user rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <scannerOperator rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <pictureEditor rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <employer rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <P49F.has_former_or_current_keeper rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <P51F.has_former_or_current_owner rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <P94B.was_created_by rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+        <P105F.right_held_by rdf:resource="http://kulturarvsdata.se/referensTillAgent" />
+    </Context>
+    <Image rdf:nodeID="im001">
+        <!-- Bild som inte är en egen entitet -->
+        <mediaType rdf:resource="http://kulturarvsdata.se/resurser/MediaType#specMediatyp" />
+        <thumbnailSource>Länk till källa för bilden 0</thumbnailSource>
+        <lowresSource>Länk till källa för bilden 1</lowresSource>
+        <highresSource>Länk till källa för bilden 2</highresSource>
+        <byline>Bildttext som ska innehålla fotograf och organisation</byline>
+        <mediaMotiveWord>Motivord</mediaMotiveWord>
+        <mediaMotiveWord>Fler motivord</mediaMotiveWord>
+        <copyright>Organisation/Person som äger bilden</copyright>
+        <mediaLicense rdf:resource="http://kulturarvsdata.se/resurser/License#specLicens" />
+        <!-- se http://kulturarvsdata.se/resurser/license/license.rdf -->
+        <mediaLicenseUrl rdf:resource="http://creativecommons.org/licenses/by/2.5/se/" />
+        <!-- eller andra cc-licenser än "by" eller http://creativecommons.org/publicdomain/mark/1.0/ -->
+    </Image>
+    <Image rdf:nodeID="im002">
+        <!-- Bild som inte är en egen entitet -->
+        <mediaType rdf:resource="http://kulturarvsdata.se/resurser/MediaType#specMediatyp2" />
+        <thumbnailSource>Länk till källa för bilden 2</thumbnailSource>
+        <lowresSource>Länk till källa för bilden 2</lowresSource>
+        <highresSource>Länk till källa för bilden 2</highresSource>
+        <byline>Bildttext som ska innehålla fotograf och organisation 2</byline>
+        <mediaMotiveWord>Motivord 1</mediaMotiveWord>
+        <mediaMotiveWord>Fler motivord</mediaMotiveWord>
+        <copyright>Organisation/Person som äger bilden 2</copyright>
+        <mediaLicense rdf:resource="http://kulturarvsdata.se/resurser/License#specLicens1" />
+        <mediaLicenseUrl rdf:resource="http://creativecommons.org/licenses/by/2.5/no/" />
+    </Image>
+    <media rdf:nodeID="med01" />
+    <media rdf:nodeID="med02"/>
+    <Media rdf:nodeID="med01">
+        <mediaType rdf:resource="http://kulturarvsdata.se/resurser/MediaType#specMediatyp1"/>
+        <byline>Text som ska innehålla skapare och organisation 1</byline>
+        <copyright>Organisation/Person som äger filen 1</copyright>
+        <link>https://example.com/example.mp4</link>
+        <mediaLicense rdf:resource="http://kulturarvsdata.se/resurser/License#specLicens1" />
+        <mediaLicenseUrl rdf:resource="http://creativecommons.org/licenses/by/2.5/no/" />
+    </Media>
+    <Media rdf:nodeID="med02">
+        <mediaType rdf:resource="http://kulturarvsdata.se/resurser/MediaType#specMediatyp2"/>
+        <byline>Text som ska innehålla skapare och organisation 2</byline>
+        <copyright>Organisation/Person som äger filen 2</copyright>
+        <link>https://example.com/example.mp3</link>
+        <mediaLicense rdf:resource="http://kulturarvsdata.se/resurser/License#specLicens2"/>
+        <mediaLicenseUrl rdf:resource="http://creativecommons.org/licenses/by/2.5/nn/" />
+    </Media>
+    <ItemNumber rdf:nodeID="num001">
+        <type>Typ av numering, t ex "inventarienummer"</type>
+        <number>Nummer</number>
+    </ItemNumber>
+    <ItemName rdf:nodeID="name001">
+        <type>Typ av namn, t ex "sakord"</type>
+        <name>Etikett som beskriver objektet</name>
+    </ItemName>
+    <ItemName rdf:nodeID="name002">
+        <type>kul namn</type>
+        <name>abbe</name>
+    </ItemName>
+    <ItemSpecification rdf:nodeID="spec001">
+        <type>Typ av specifikation, t ex "produkttyp" eller "modell"</type>
+        <spec>Modellbeteckning eller liknande</spec>
+    </ItemSpecification>
+    <ItemMaterial rdf:nodeID="mat001">
+        <type>Typ av material, t ex "huvudmaterial" eller "tilläggsmaterial"</type>
+        <material>Material, t ex "sten"</material>
+    </ItemMaterial>
+    <ItemDescription rdf:nodeID="desc001">
+        <type>Typ av beskrivning, t ex "föremålsbeskrivning"</type>
+        <desc>Beskrivning, även ostrukturerad text för fritextsökning</desc>
+    </ItemDescription>
+    <ItemMeasurement rdf:nodeID="meas001">
+        <type>Typ av mått, t ex "längd"</type>
+        <value>Värde, t ex "23"</value>
+        <unit>Enhet, t ex "mm"</unit>
+        <qualifier>Specifikation av vad som mäts, t ex "egg", "före konservering"</qualifier>
+    </ItemMeasurement>
+</rdf:RDF>

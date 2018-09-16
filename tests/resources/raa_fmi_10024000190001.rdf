@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:ns5="http://kulturarvsdata.se/ksamsok#"
+    xmlns:ns6="http://www.mindswap.org/2003/owl/geo/geoFeatures20040307.owl#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <rdf:Description rdf:about="http://kulturarvsdata.se/raa/fmi/10024000190001">
+        <ns5:buildDate>2017-06-26</ns5:buildDate>
+        <ns5:createdDate>2004-11-23</ns5:createdDate>
+        <ns5:dataQuality rdf:resource="http://kulturarvsdata.se/resurser/DataQuality#raw" />
+        <ns5:itemClassName>Fångstgård</ns5:itemClassName>
+        <ns5:itemLabel>Varggården, Fångstgård</ns5:itemLabel>
+        <ns5:itemLicense rdf:resource="http://kulturarvsdata.se/resurser/License#cc0" />
+        <ns5:itemLicenseUrl rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+        <ns5:itemSuperType rdf:resource="http://kulturarvsdata.se/resurser/EntitySuperType#object" />
+        <ns5:itemTitle>Varggården</ns5:itemTitle>
+        <ns5:itemType rdf:resource="http://kulturarvsdata.se/resurser/EntityType#monument" />
+        <ns5:ksamsokVersion>1.11</ns5:ksamsokVersion>
+        <ns5:lastChangedDate>2017-06-15</ns5:lastChangedDate>
+        <ns5:mediaType>text/plain</ns5:mediaType>
+        <ns5:presentation xmlns:georss="http://www.georss.org/georss" xmlns:pres="http://kulturarvsdata.se/presentation#"
+            rdf:parseType="Literal">
+            <pres:item>
+                <pres:id>10024000190001</pres:id>
+                <pres:entityUri>http://kulturarvsdata.se/raa/fmi/10024000190001</pres:entityUri>
+                <pres:type>Kulturlämning</pres:type>
+                <pres:idLabel>Hållnäs 19:1</pres:idLabel>
+                <pres:itemLabel>Varggården, Fångstgård</pres:itemLabel>
+                <pres:description>Varggård, ca 185x90 m st (N-S). Varggården omgives utom i SÖ av en mer eller mindre tydlig vall med innanför
+                    liggande grav. Vallen är 3-5 m br samt 0,5-1,0 m h. Den innanför löpande graven är 3-5 m br och 0,5-1,0
+                    m dj. I sin SV mot vägen vända sida är vallgraven delvis stenskodd. I varggårdens inre finns en större
+                    vall ca 77 m l (N-S), ca 7 m br och ca 1,25 m h. I en bågform N om denna löper en stensträng. I områdets
+                    SV del, mot vägen, finns en varggrop, ca 7 m diam och ca 1,75 m dj. Se skiss och beskrivning på de skannade
+                    sidorna. Varggården anlades år 1803 bekostad av De Geer på Lövsta bruk. (Förstagångsinventeringen 1952
+                    och revideringsinventeringen 2013)</pres:description>
+                <pres:context>
+                    <pres:placeLabel>Län: Uppsala, Kommun: Tierp, Landskap: Uppland, Socken: Hållnäs</pres:placeLabel>
+                </pres:context>
+                <georss:where xmlns:gml="http://www.opengis.net/gml">
+                    <gml:Point srsName="EPSG:4326">
+                        <gml:coordinates cs="," decimal="." ts=" ">17.9880073431206,60.4274941101917</gml:coordinates>
+                    </gml:Point>
+                </georss:where>
+                <pres:image>
+                    <pres:src type="lowres">http://www.fmis.raa.se/fmis/bilder/03/0360/240/foto/12000000608376_F.jpg</pres:src>
+                    <pres:src type="thumbnail">http://www.fmis.raa.se/fmis/bilder/03/0360/240/foto/thumbnail/12000000608376_F.jpg</pres:src>
+                    <pres:motive>Vallen i mitten</pres:motive>
+                    <pres:byline>Anna Ulfhielm</pres:byline>
+                </pres:image>
+                <pres:representations>
+                    <pres:representation format="RDF">http://kulturarvsdata.se/raa/fmi/rdf/10024000190001</pres:representation>
+                    <pres:representation format="Presentation">http://kulturarvsdata.se/raa/fmi/xml/10024000190001</pres:representation>
+                    <pres:representation format="HTML">http://kulturarvsdata.se/raa/fmi/html/10024000190001</pres:representation>
+                </pres:representations>
+                <pres:organization>Riksantikvarieämbetet</pres:organization>
+                <pres:organizationShort>RAÄ</pres:organizationShort>
+                <pres:service>Fornminnesinformationssystemet (FMIS)</pres:service>
+                <pres:version>1.11</pres:version>
+                <pres:buildDate>2017-06-26</pres:buildDate>
+            </pres:item>
+        </ns5:presentation>
+        <ns5:serviceName>fmi</ns5:serviceName>
+        <ns5:serviceOrganization>RAÄ</ns5:serviceOrganization>
+        <ns5:subject rdf:resource="http://kulturarvsdata.se/resurser/Subject#site" />
+        <ns5:thumbnail>http://www.fmis.raa.se/fmis/bilder/03/0360/240/foto/thumbnail/12000000608376_F.jpg</ns5:thumbnail>
+        <ns5:url>http://www.fmis.raa.se/cocoon/fornsok/search.html?tab=3&amp;page=1&amp;objektid=10024000190001</ns5:url>
+        <rdf:type
+            rdf:resource="http://kulturarvsdata.se/ksamsok#Entity" /></rdf:Description>
+    <rdf:Description rdf:nodeID="bNode_0">
+        <ns5:number>Hållnäs 19:1</ns5:number>
+        <ns5:type>Fornlämningsnummer</ns5:type>
+        <rdf:type rdf:resource="http://kulturarvsdata.se/ksamsok#ItemNumber" /></rdf:Description>
+    <rdf:Description rdf:nodeID="bNode_1">
+        <ns5:name>Fångstgård</ns5:name>
+        <ns5:type>Lämningstyp</ns5:type>
+        <rdf:type rdf:resource="http://kulturarvsdata.se/ksamsok#ItemName" /></rdf:Description>
+    <rdf:Description rdf:nodeID="bNode_2">
+        <ns5:spec>Detta kan vara en fornlämning.</ns5:spec>
+        <ns5:type>Anmärkning</ns5:type>
+        <rdf:type rdf:resource="http://kulturarvsdata.se/ksamsok#ItemSpecification" /></rdf:Description>
+    <rdf:Description rdf:nodeID="bNode_3">
+        <ns5:desc>Varggård</ns5:desc>
+        <ns5:type>Beskrivning</ns5:type>
+        <rdf:type rdf:resource="http://kulturarvsdata.se/ksamsok#ItemDescription" /></rdf:Description>
+    <rdf:Description rdf:nodeID="bNode_4">
+        <ns5:desc>Ca 10 m Ö om vägen Giboda-Vavd.</ns5:desc>
+        <ns5:type>Orientering</ns5:type>
+        <rdf:type rdf:resource="http://kulturarvsdata.se/ksamsok#ItemDescription" /></rdf:Description>
+    <rdf:Description rdf:nodeID="bNode_5">
+        <ns5:desc>Skogsmark på sandmo.</ns5:desc>
+        <ns5:type>Terräng</ns5:type>
+        <rdf:type rdf:resource="http://kulturarvsdata.se/ksamsok#ItemDescription" /></rdf:Description>
+    <rdf:Description rdf:nodeID="bNode_6">
+        <ns5:contextLabel>Belägen</ns5:contextLabel>
+        <ns5:contextSuperType rdf:resource="http://kulturarvsdata.se/resurser/ContextSuperType#create"
+        />
+        <ns5:contextType rdf:resource="http://kulturarvsdata.se/resurser/ContextType#produce" />
+        <ns5:coordinates xmlns:gml="http://www.opengis.net/gml" rdf:parseType="Literal">
+            <gml:Polygon srsName="EPSG:4326">
+                <gml:outerBoundaryIs>
+                    <gml:LinearRing>
+                        <gml:coordinates cs="," decimal="." ts=" ">17.9890830342301,60.4273082580399 17.9890721602025,60.4275583224671 17.989055845279,60.4277833186284
+                            17.9890108835292,60.4280142161243 17.9889090251846,60.4282623057376 17.9888200405121,60.4283879257598
+                            17.9884934005819,60.4284440680364 17.9880029845627,60.428447396735 17.9876415500271,60.4284250611956
+                            17.9874365971837,60.4283734816019 17.9873270457266,60.428131346267 17.9871950632646,60.4278033870636
+                            17.9869132652792,60.4272701650648 17.9867911761306,60.4270498924048 17.9867225413966,60.4269363293468
+                            17.9867074749337,60.426777057374 17.986818003121,60.4266977915945 17.9871491714047,60.4266541578104
+                            17.9876509805041,60.4266578190956 17.9880397281443,60.4266562914123 17.9884098504281,60.4266982447426
+                            17.988668622673,60.4267583621601 17.9888497869113,60.4268504119392 17.9890005245649,60.4270239001677
+                            17.9890929693614,60.4272451567936 17.9890830342301,60.4273082580399</gml:coordinates>
+                    </gml:LinearRing>
+                </gml:outerBoundaryIs>
+            </gml:Polygon>
+        </ns5:coordinates>
+        <ns5:countyName>Uppsala</ns5:countyName>
+        <ns5:municipalityName>Tierp</ns5:municipalityName>
+        <ns5:parishName>Hållnäs</ns5:parishName>
+        <ns5:provinceName>Uppland</ns5:provinceName>
+        <ns6:county rdf:resource="http://kulturarvsdata.se/resurser/aukt/geo/county#03" />
+        <ns6:municipality rdf:resource="http://kulturarvsdata.se/resurser/aukt/geo/municipality#0360" />
+        <ns6:parish rdf:resource="http://kulturarvsdata.se/resurser/aukt/geo/parish#240" />
+        <ns6:province rdf:resource="http://kulturarvsdata.se/resurser/aukt/geo/province#Up" />
+        <rdf:type rdf:resource="http://kulturarvsdata.se/ksamsok#Context" /></rdf:Description>
+    <rdf:Description rdf:nodeID="bNode_7">
+        <ns5:lowresSource>http://www.fmis.raa.se/fmis/bilder/03/0360/240/dokument/0240-0019-0020-02-D.jpg</ns5:lowresSource>
+        <ns5:mediaMotiveWord>Delat inventeringsbokuppslag, Lokal 19/20 (2)</ns5:mediaMotiveWord>
+        <ns5:mediaType>image/jpeg</ns5:mediaType>
+        <ns5:thumbnailSource>http://www.fmis.raa.se/fmis/bilder/03/0360/240/dokument/thumbnail/0240-0019-0020-02-D.jpg</ns5:thumbnailSource>
+        <rdf:type
+            rdf:resource="http://kulturarvsdata.se/ksamsok#Image" /></rdf:Description>
+    <rdf:Description rdf:nodeID="bNode_8">
+        <ns5:lowresSource>http://www.fmis.raa.se/fmis/bilder/03/0360/240/dokument/0240-0019-01-D.jpg</ns5:lowresSource>
+        <ns5:mediaMotiveWord>Inventeringsbokuppslag (1)</ns5:mediaMotiveWord>
+        <ns5:mediaType>image/jpeg</ns5:mediaType>
+        <ns5:thumbnailSource>http://www.fmis.raa.se/fmis/bilder/03/0360/240/dokument/thumbnail/0240-0019-01-D.jpg</ns5:thumbnailSource>
+        <rdf:type
+            rdf:resource="http://kulturarvsdata.se/ksamsok#Image" /></rdf:Description>
+    <rdf:Description rdf:nodeID="bNode_9">
+        <ns5:byline>Anna Ulfhielm</ns5:byline>
+        <ns5:lowresSource>http://www.fmis.raa.se/fmis/bilder/03/0360/240/foto/12000000608376_F.jpg</ns5:lowresSource>
+        <ns5:mediaMotiveWord>Vallen i mitten</ns5:mediaMotiveWord>
+        <ns5:mediaType>image/jpeg</ns5:mediaType>
+        <ns5:thumbnailSource>http://www.fmis.raa.se/fmis/bilder/03/0360/240/foto/thumbnail/12000000608376_F.jpg</ns5:thumbnailSource>
+        <rdf:type
+            rdf:resource="http://kulturarvsdata.se/ksamsok#Image" /></rdf:Description>
+    <rdf:Description rdf:nodeID="bNode_10">
+        <ns5:byline>Anna Ulfhielm</ns5:byline>
+        <ns5:lowresSource>http://www.fmis.raa.se/fmis/bilder/03/0360/240/foto/12000000608378_F.jpg</ns5:lowresSource>
+        <ns5:mediaMotiveWord>Vall</ns5:mediaMotiveWord>
+        <ns5:mediaType>image/jpeg</ns5:mediaType>
+        <ns5:thumbnailSource>http://www.fmis.raa.se/fmis/bilder/03/0360/240/foto/thumbnail/12000000608378_F.jpg</ns5:thumbnailSource>
+        <rdf:type
+            rdf:resource="http://kulturarvsdata.se/ksamsok#Image" /></rdf:Description>
+    <rdf:Description rdf:nodeID="bNode_11">
+        <ns5:byline>Anna Ulfhielm</ns5:byline>
+        <ns5:lowresSource>http://www.fmis.raa.se/fmis/bilder/03/0360/240/foto/12000000608379_F.jpg</ns5:lowresSource>
+        <ns5:mediaMotiveWord>Vallgrav</ns5:mediaMotiveWord>
+        <ns5:mediaType>image/jpeg</ns5:mediaType>
+        <ns5:thumbnailSource>http://www.fmis.raa.se/fmis/bilder/03/0360/240/foto/thumbnail/12000000608379_F.jpg</ns5:thumbnailSource>
+        <rdf:type
+            rdf:resource="http://kulturarvsdata.se/ksamsok#Image" /></rdf:Description>
+    <rdf:Description rdf:about="http://kulturarvsdata.se/raa/fmi/10024000190001">
+        <ns5:context rdf:nodeID="bNode_6" />
+        <ns5:image rdf:nodeID="bNode_7" />
+        <ns5:image rdf:nodeID="bNode_8" />
+        <ns5:image rdf:nodeID="bNode_9" />
+        <ns5:image rdf:nodeID="bNode_10" />
+        <ns5:image rdf:nodeID="bNode_11" />
+        <ns5:itemDescription rdf:nodeID="bNode_3" />
+        <ns5:itemDescription rdf:nodeID="bNode_4" />
+        <ns5:itemDescription rdf:nodeID="bNode_5" />
+        <ns5:itemName rdf:nodeID="bNode_1" />
+        <ns5:itemNumber rdf:nodeID="bNode_0" />
+        <ns5:itemSpecification rdf:nodeID="bNode_2" />
+    </rdf:Description>
+</rdf:RDF>
