@@ -3,11 +3,12 @@ import re
 import requests
 
 from .utils import valid_http_status
+from .utils import kulturarvsdata_to_id
 
 def bounding_box(auth, west, south, east, north, batch_size=50):
     raise NotImplementedError
 
-def query(auth, query, batch_size=50):
+def cql(auth, cql, batch_size=50):
     raise NotImplementedError
 
 def text(auth, text, images=False, batch_size=50):
@@ -15,6 +16,25 @@ def text(auth, text, images=False, batch_size=50):
 
 def period(auth, start_time, end_time, batch_size=50):
     raise NotImplementedError
+
+# not a generator
+def relations(auth, uri):
+    #TODO write two tests (without relations and with relations)
+    soch_id = kulturarvsdata_to_id(uri)
+
+    request_query = auth.endpoint + 'ksamsok/api?x-api=' + auth.key + '&method=getRelations&relation=all&objectId=' + soch_id
+
+    headers = { 'Accept': 'application/json' }
+    r = requests.get(request_query, headers=headers)
+    if not valid_http_status(r.status_code):
+        return False
+
+    #TODO record without any relations?
+    relations = list()
+    for relation in r.json['result']['relations']['relation']:
+        relations.append(relation)
+
+    return relations
 
 # not a generator
 def hints(auth, text, count=5):
