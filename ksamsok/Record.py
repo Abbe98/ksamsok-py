@@ -58,6 +58,9 @@ class Record:
         self.numbers = list()
         self.measurements = list()
 
+        self.images = list()
+        self.media = list()
+
         self.raw_rdf = record
         self.parse()
 
@@ -214,6 +217,57 @@ class Record:
             desc['desc'] = self.if_match(desc_pattern, node)
 
             self.descriptions.append(desc)
+
+        image_nodes = self.get_nodes('image', 'Image', ksamsok_ns)
+        # media_type_pattern
+        thumbnail_pattern_media = re.compile(r'<{0}thumbnailSource>(.+?)<\/{0}thumbnailSource>'.format(ksamsok_ns))
+        lowres_pattern = re.compile(r'<{0}lowresSource>(.+?)<\/{0}lowresSource>'.format(ksamsok_ns))
+        highres_pattern = re.compile(r'<{0}highresSource>(.+?)<\/{0}highresSource>'.format(ksamsok_ns))
+        byline_pattern = re.compile(r'<{0}byline>(.+?)<\/{0}byline>'.format(ksamsok_ns))
+        copyright_pattern = re.compile(r'<{0}copyright>(.+?)<\/{0}copyright>'.format(ksamsok_ns))
+        motive_key_word_pattern_media = re.compile(r'<{0}mediaMotiveWord>(.+?)<\/{0}mediaMotiveWord>'.format(ksamsok_ns))
+        license_pattern = re.compile(r'<{0}mediaLicense rdf:resource="(.+?)"(?:|\s)\/>'.format(ksamsok_ns))
+        license_url_pattern = re.compile(r'<{0}mediaLicenseUrl rdf:resource="(.+?)"(?:|\s)\/>'.format(ksamsok_ns))
+
+        for node in image_nodes:
+            image = {}
+            image['thumbnail'] = self.if_match(thumbnail_pattern_media, node)
+            image['lowres'] = self.if_match(lowres_pattern, node)
+            image['highres'] = self.if_match(highres_pattern, node)
+            image['byline'] = self.if_match(byline_pattern, node)
+            image['copyright'] = self.if_match(copyright_pattern, node)
+            image['license'] = self.if_match(license_pattern, node)
+            image['license_url'] = self.if_match(license_url_pattern, node)
+
+            image['media_type'] = self.if_match(media_type_pattern, node)
+            image['media_type'] = image['media_type'].split('#')[1] if image['media_type'] else None
+
+            image['motive_key_words'] = list()
+            for mkw in re.finditer(motive_key_word_pattern_media, node):
+                image['motive_key_words'].append(mkw.group(1))
+
+            self.images.append(image)
+
+        media_nodes = self.get_nodes('media', 'Media', ksamsok_ns)
+        # media_type_pattern
+        # byline_pattern
+        # copyright_pattern
+        # license_pattern
+        # license_url_pattern
+        link_pattern = re.compile(r'<{0}link>(.+?)<\/{0}link>'.format(ksamsok_ns))
+
+        for node in media_nodes:
+            media = {}
+            media['link'] = self.if_match(link_pattern, node)
+            media['byline'] = self.if_match(byline_pattern, node)
+            media['copyright'] = self.if_match(copyright_pattern, node)
+            media['license'] = self.if_match(license_pattern, node)
+            media['license_url'] = self.if_match(license_url_pattern, node)
+
+            media['media_type'] = self.if_match(media_type_pattern, node)
+            media['media_type'] = media['media_type'].split('#')[1] if media['media_type'] else None
+
+            self.media.append(media)
 
     def exists(self):
         #TODO needs test

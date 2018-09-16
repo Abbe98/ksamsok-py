@@ -116,6 +116,7 @@
         <crm:P11F.had_participant>URI till objekt av typen person. Används endast av Händelse.</crm:P11F.had_participant>
         <crm:P11B.participated_in>URI till objekt av typen Händelse.</crm:P11B.participated_in>
         <image rdf:nodeID="im001" />
+        <image rdf:nodeID="im002" />
     </Entity>
     <Context rdf:nodeID="ctx001">
         <!-- create, interact eller cease -->
@@ -223,9 +224,9 @@
     <Image rdf:nodeID="im001">
         <!-- Bild som inte är en egen entitet -->
         <mediaType rdf:resource="http://kulturarvsdata.se/resurser/MediaType#specMediatyp" />
-        <thumbnailSource>Länk till källa för bilden</thumbnailSource>
-        <lowresSource>Länk till källa för bilden</lowresSource>
-        <highresSource>Länk till källa för bilden</highresSource>
+        <thumbnailSource>Länk till källa för bilden 0</thumbnailSource>
+        <lowresSource>Länk till källa för bilden 1</lowresSource>
+        <highresSource>Länk till källa för bilden 2</highresSource>
         <byline>Bildttext som ska innehålla fotograf och organisation</byline>
         <mediaMotiveWord>Motivord</mediaMotiveWord>
         <mediaMotiveWord>Fler motivord</mediaMotiveWord>
@@ -235,6 +236,37 @@
         <mediaLicenseUrl rdf:resource="http://creativecommons.org/licenses/by/2.5/se/" />
         <!-- eller andra cc-licenser än "by" eller http://creativecommons.org/publicdomain/mark/1.0/ -->
     </Image>
+    <Image rdf:nodeID="im002">
+        <!-- Bild som inte är en egen entitet -->
+        <mediaType rdf:resource="http://kulturarvsdata.se/resurser/MediaType#specMediatyp2" />
+        <thumbnailSource>Länk till källa för bilden 2</thumbnailSource>
+        <lowresSource>Länk till källa för bilden 2</lowresSource>
+        <highresSource>Länk till källa för bilden 2</highresSource>
+        <byline>Bildttext som ska innehålla fotograf och organisation 2</byline>
+        <mediaMotiveWord>Motivord 1</mediaMotiveWord>
+        <mediaMotiveWord>Fler motivord</mediaMotiveWord>
+        <copyright>Organisation/Person som äger bilden 2</copyright>
+        <mediaLicense rdf:resource="http://kulturarvsdata.se/resurser/License#specLicens1" />
+        <mediaLicenseUrl rdf:resource="http://creativecommons.org/licenses/by/2.5/no/" />
+    </Image>
+    <media rdf:nodeID="med01" />
+    <media rdf:nodeID="med02"/>
+    <Media rdf:nodeID="med01">
+        <mediaType rdf:resource="http://kulturarvsdata.se/resurser/MediaType#specMediatyp1"/>
+        <byline>Text som ska innehålla skapare och organisation 1</byline>
+        <copyright>Organisation/Person som äger filen 1</copyright>
+        <link>https://example.com/example.mp4</link>
+        <mediaLicense rdf:resource="http://kulturarvsdata.se/resurser/License#specLicens1" />
+        <mediaLicenseUrl rdf:resource="http://creativecommons.org/licenses/by/2.5/no/" />
+    </Media>
+    <Media rdf:nodeID="med02">
+        <mediaType rdf:resource="http://kulturarvsdata.se/resurser/MediaType#specMediatyp2"/>
+        <byline>Text som ska innehålla skapare och organisation 2</byline>
+        <copyright>Organisation/Person som äger filen 2</copyright>
+        <link>https://example.com/example.mp3</link>
+        <mediaLicense rdf:resource="http://kulturarvsdata.se/resurser/License#specLicens2"/>
+        <mediaLicenseUrl rdf:resource="http://creativecommons.org/licenses/by/2.5/nn/" />
+    </Media>
     <ItemNumber rdf:nodeID="num001">
         <type>Typ av numering, t ex "inventarienummer"</type>
         <number>Nummer</number>
