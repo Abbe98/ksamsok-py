@@ -6,6 +6,7 @@ setup(
   name = 'ksamsok',
   packages = ['ksamsok'],
   install_requires=['lxml', 'requests'],
+  python_requires='>=3.4.0',
   version = version,
   description = 'API library for the cultural heritage K-Samsök(SOCH) aggregator.',
   author = 'Albin Larsson',
@@ -13,5 +14,16 @@ setup(
   url = 'https://github.com/Abbe98/' + repo,
   download_url = 'https://github.com/Abbe98/' + repo + '/tarball/' + version,
   keywords = ['SOCH', 'K-Samsök', 'heritage', 'cultural', 'API'],
-  classifiers = [],
+  license='MIT',
+  classifiers=[
+    'License :: OSI Approved :: MIT License',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.4',
+    'Programming Language :: Python :: 3.5',
+    'Programming Language :: Python :: 3.6',
+    'Programming Language :: Python :: 3 :: Only',
+    'Intended Audience :: Developers',
+    'Intended Audience :: Education'
+  ]
 )
