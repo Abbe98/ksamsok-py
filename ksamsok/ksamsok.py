@@ -299,7 +299,7 @@ class KSamsok:
     def getHints(self, string, count = 5):
         self.requiresKey()
 
-        request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=searchHelp&index=itemMotiveWord|itemKeyWord&prefix=' + string + '*&maxValueCount=' + str(count)
+        request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=searchHelp&index=text&prefix=' + string + '*&maxValueCount=' + str(count)
 
         r = requests.get(request_query)
         if not self.validHttpStatus(r.status_code):
