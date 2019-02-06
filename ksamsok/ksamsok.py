@@ -218,6 +218,8 @@ class KSamsok:
         return self.parseRecord(xml)
 
     def search(self, text, start, hits, images = False):
+        self.requiresKey()
+
         # create the request URL
         request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=search&hitsPerPage=' + str(hits) + '&startRecord=' + str(start) + '&query=text%3D"' + text + '"&recordSchema=presentation'
 
