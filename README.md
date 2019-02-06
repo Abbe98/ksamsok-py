@@ -75,6 +75,21 @@ The method `geoSearch()` allows you to search by a geographical bounding box. `g
 culturalSearch.geoSearch(16.41, 59.07, 16.42, 59.08, 300, 500)
 ```
 
+#### CQL Queries
+
+Requires an API key.
+
+The method `cql()`
+
+ - query(`string`), the string to search for in K-Samsök.
+ - start(`int`), the result to start at, for returning the first result this should be set to 1.
+ - hits(`int`), optional by default set to 60. The number of results to return (1-500).
+
+```python
+# Search for photos with coordinates and images.
+culturalSearch.cql('geoDataExists=n AND thumbnailExists=j AND itemType=foto', 0)
+```
+
 #### URI Format
 
 The `formatUri()` method can validate and convert SOCH URI/URL;s. `formatUri()` will return `False` if provided with a invalid URI. `formatUri()` has three parameters:
