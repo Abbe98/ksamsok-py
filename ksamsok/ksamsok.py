@@ -251,7 +251,6 @@ class KSamsok:
         # create the request URL
         request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=search&hitsPerPage=' + str(hits) + '&startRecord=' + str(start) + '&query=' + query + '&recordSchema=presentation'
 
-        print(request_query)
         r = requests.get(request_query)
         if not self.validHttpStatus(r.status_code):
             return False
