@@ -245,7 +245,7 @@ class KSamsok:
         self.requiresKey()
 
         cql = 'text=' + text
-        # in erlier versions we did add &thumbnailExists=j to url
+        # in erlier versions we added &thumbnailExists=j to url
         if images:
             cql = cql + ' AND thumbnailExists=j'
 
