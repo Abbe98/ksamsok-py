@@ -241,6 +241,20 @@ class KSamsok:
 
         return result
 
+    def cqlGenerator(self, query):
+        start = 0
+        has_more = True
+
+        while has_more:
+            results = self.cql(query, start, 500)['records']
+            for item in results:
+                yield item
+
+            if len(results) < 500:
+                has_more = False
+
+            start += 500
+
     def search(self, text, start, hits, images = False):
         self.requiresKey()
 
