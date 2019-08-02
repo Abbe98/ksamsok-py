@@ -242,6 +242,8 @@ class KSamsok:
         return result
 
     def cqlGenerator(self, query):
+        self.requiresKey()
+
         start = 0
         has_more = True
 
