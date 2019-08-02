@@ -217,34 +217,6 @@ class KSamsok:
 
         return self.parseRecord(xml)
 
-    def search(self, text, start, hits, images = False):
-        self.requiresKey()
-
-        # create the request URL
-        request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=search&hitsPerPage=' + str(hits) + '&startRecord=' + str(start) + '&query=text%3D"' + text + '"&recordSchema=presentation'
-
-        # if images = true add &thumbnailExists=j to url
-        if images:
-            request_query = request_query + '&thumbnailExists=j'
-
-        r = requests.get(request_query)
-        if not self.validHttpStatus(r.status_code):
-            return False
-
-        # remove all XML namespaces, and push the bytes to etree.XML
-        xml = etree.XML(str.encode(self.killXmlNamespaces(r.text)))
-
-        result = {}
-        hits = xml.xpath('/result/totalHits')
-        result['hits'] = hits[0].text if 0 < len(hits) else None
-
-        result['records'] = list()
-        records = xml.xpath('/result/records/record/pres_item')
-        for record in records:
-            result['records'].append((self.parseRecord(record)))
-
-        return result
-
     def cql(self, query, start, hits = 60):
         self.requiresKey()
 
@@ -269,29 +241,22 @@ class KSamsok:
 
         return result
 
+    def search(self, text, start, hits, images = False):
+        self.requiresKey()
+
+        cql = 'text=' + text
+        # in erlier versions we did add &thumbnailExists=j to url
+        if images:
+            cql = cql + ' AND thumbnailExists=j'
+
+        return self.cql(cql, start, hits)
+
     def geoSearch(self, west, south, east, north, start, hits = 60):
         self.requiresKey()
 
-        # create the request URL
-        request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=search&hitsPerPage=' + str(hits) + '&startRecord=' + str(start) + '&query=boundingBox=/WGS84%20"' + str(west) + '%20' + str(south) + '%20' + str(east) + '%20' + str(north) + '"&recordSchema=presentation'
+        cql = 'boundingBox=/WGS84%20"' + str(west) + ' ' + str(south) + ' ' + str(east) + ' ' + str(north)
 
-        r = requests.get(request_query)
-        if not self.validHttpStatus(r.status_code):
-            return False
-
-        # remove all XML namespaces, and push the bytes to etree.XML
-        xml = etree.XML(str.encode(self.killXmlNamespaces(r.text)))
-
-        result = {}
-        hits = xml.xpath('/result/totalHits')
-        result['hits'] = hits[0].text if 0 < len(hits) else None
-
-        result['records'] = list()
-        records = xml.xpath('/result/records/record/pres_item')
-        for record in records:
-            result['records'].append((self.parseRecord(record)))
-
-        return result
+        return self.cql(cql, start, hits)
 
     def getRelations(self, uri):
         self.requiresKey()
