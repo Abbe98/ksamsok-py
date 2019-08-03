@@ -1,6 +1,6 @@
 # KSamsök-PY
 
-KSamsök-PY is a Python library for the [K-Samsök(SOCH) API](http://www.ksamsok.se/in-english/). The K-Samsök aggregator has over 6.8 million cultural objects indexed from various sources.
+KSamsök-PY is a Python library for the [K-Samsök(SOCH) API](http://www.ksamsok.se/in-english/). The K-Samsök aggregator has over 7.5 million cultural objects indexed from various sources.
 
 ## Documentation
 
@@ -81,13 +81,27 @@ Requires an API key.
 
 The method `cql()`
 
- - query(`string`), the string to search for in K-Samsök.
+ - query(`string`), the query string for K-Samsök.
  - start(`int`), the result to start at, for returning the first result this should be set to 1.
  - hits(`int`), optional by default set to 60. The number of results to return (1-500).
 
 ```python
 # Search for photos with coordinates and images.
 culturalSearch.cql('geoDataExists=n AND thumbnailExists=j AND itemType=foto', 0)
+```
+
+#### GQL Queries Genertor
+
+Requires an API key.
+
+The genertor `cqlGenerator()` takes only one parameter and allows you to loop through the results:
+
+ - query(`string`), the query string to for K-Samsök.
+
+```python
+# Search for photos with coordinates and images.
+for item in culturalSearch.cql('geoDataExists=n AND thumbnailExists=j AND itemType=foto'):
+    print(item)
 ```
 
 #### URI Format
@@ -233,7 +247,7 @@ When KSamsök-PY does not have a method for a request you want to preform agains
 
 There are two `protected` methods that essential when extending `KSamsok`, `killXmlNamespaces()` and `parseRecord()` those are the same functions as `public` methods uses.
 
-To get started with see the [implementation of `search()`](https://github.com/Abbe98/ksamsok-py/blob/master/ksamsok/ksamsok.py#L179). Note that `KSamsok` parses and uses the "XML Presentation" format and not the RDF format provided by SOCH.
+To get started with see the [implementation of `cql()`](https://github.com/Abbe98/ksamsok-py/blob/master/ksamsok/ksamsok.py#L220). Note that `KSamsok` parses and uses the "XML Presentation" format and not the RDF format provided by SOCH.
 
 ### Advanced Usage: Custom Endpoint
 
