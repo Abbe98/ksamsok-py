@@ -20,25 +20,15 @@ pip install ksamsok
 from ksamsok import KSamsok
 ```
 
-Many action within the API requires an API key that you can obtain by contacting the Swedish National Heritage Board. For development you can use the key `test`.
-
 For using this library against custom Kulturarvsdata / K-Samsök endpoints see a section at the end of this document.
 
-Example without an API key:
+Initiating:
 
 ```python
 culturalSearch = KSamsok()
 ```
 
-Example with an API key:
-
-```python
-culturalSearch = KSamsok('test')
-```
-
 #### Text Search
-
-Requires an API key.
 
 The basic `search()` method has a total of four parameters:
 
@@ -59,8 +49,6 @@ culturalSearch.search('kyrka', 0, 10, true)
 
 #### Bounding Box Search
 
-Requires an API key.
-
 The method `geoSearch()` allows you to search by a geographical bounding box. `geoSearch()` has six parameters:
 
  - west(`int`), the most west longitude border of your bounding box.
@@ -77,8 +65,6 @@ culturalSearch.geoSearch(16.41, 59.07, 16.42, 59.08, 300, 500)
 
 #### CQL Queries
 
-Requires an API key.
-
 The method `cql()`
 
  - query(`string`), the query string for K-Samsök.
@@ -91,8 +77,6 @@ culturalSearch.cql('geoDataExists=n AND thumbnailExists=j AND itemType=foto', 0)
 ```
 
 #### GQL Queries Genertor
-
-Requires an API key.
 
 The genertor `cqlGenerator()` takes only one parameter and allows you to loop through the results:
 
@@ -171,8 +155,6 @@ culturalSearch.kringlaToUri('http://www.kringla.nu/kringla/objekt?filter=itemTyp
 
 #### Relations
 
-Requires an API key.
-
 The `getRelations()` method allows you to return a list of object related to another. The method has only one parameter:
 
  - object uri(`string`), an valid URI for a object in K-Samsök. The parameters allows different types of URIs described below.
@@ -227,8 +209,6 @@ culturalSearch.getObject('raa/fmi/10028201230001')
 
 #### Search Hints
 
-Requires an API key.
-
 The `getHints()` method allows you to return search suggestions from a string. This method has two parameters:
 
  - text(`string`), the string to get suggestions from.
@@ -254,7 +234,7 @@ To get started with see the [implementation of `cql()`](https://github.com/Abbe9
 You can setup ksamsok-py to work against a custom Kulturarvsdata / K-Samsök instance by passing in an `endpoint` parameter to the constructor:
 
 ```python
-culturalSearch = KSamsok(key='test', endpoint='https://example.com/')
+culturalSearch = KSamsok(endpoint='https://example.com/')
 ```
 
 Note that when using an custom endpoint `formatUri()` will still output URLs targeting kulturarvsdata.se and not the custom endpoint. It will accept custom URIs as input.
