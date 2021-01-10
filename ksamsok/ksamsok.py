@@ -3,7 +3,7 @@ import requests
 from lxml import etree
 
 class KSamsok:
-    def __init__(self, key=None, endpoint = 'http://kulturarvsdata.se/'):
+    def __init__(self, key = None, endpoint = 'https://kulturarvsdata.se/'):
         self.endpoint = endpoint
         self.key = key
 
