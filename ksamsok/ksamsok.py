@@ -274,7 +274,7 @@ class KSamsok:
 
         return self.cql(cql, start, hits)
 
-    def getRelations(self, uri):
+    def getRelations(self, uri, infer_same_as = False):
         self.requiresKey()
 
         uri = self.formatUri(uri, 'raw')
@@ -283,6 +283,9 @@ class KSamsok:
             return False
 
         request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=getRelations&relation=all&objectId=' + uri
+
+        if infer_same_as:
+            request_query += '&inferSameAs=yes'
 
         r = requests.get(request_query)
         if not self.validHttpStatus(r.status_code):
