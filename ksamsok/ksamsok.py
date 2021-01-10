@@ -3,15 +3,8 @@ import requests
 from lxml import etree
 
 class KSamsok:
-    def __init__(self, key = None, endpoint = 'https://kulturarvsdata.se/'):
+    def __init__(self, endpoint = 'https://kulturarvsdata.se/'):
         self.endpoint = endpoint
-        self.key = key
-
-        if self.key:
-            test_query = self.endpoint + 'ksamsok/api?x-api=' + key + '&method=search&query=text%3D"test"&recordSchema=presentation'
-
-            if not self.validateRequest(test_query):
-                raise ValueError('Bad API key or inaccessible endpoint.')
 
     def validateRequest(self, url):
         r = requests.head(url)
@@ -22,10 +15,6 @@ class KSamsok:
             return True
         else:
             return False
-
-    def requiresKey(self):
-        if self.key is None:
-            raise ValueError('This method requires an API key.')
 
     def parseRecord(self, record):
         parsed_record = {}
@@ -218,10 +207,8 @@ class KSamsok:
         return self.parseRecord(xml)
 
     def cql(self, query, start, hits = 60):
-        self.requiresKey()
-
         # create the request URL
-        request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=search&hitsPerPage=' + str(hits) + '&startRecord=' + str(start) + '&query=' + query + '&recordSchema=presentation'
+        request_query = self.endpoint + 'ksamsok/api?method=search&hitsPerPage=' + str(hits) + '&startRecord=' + str(start) + '&query=' + query + '&recordSchema=presentation'
 
         r = requests.get(request_query)
         if not self.validHttpStatus(r.status_code):
@@ -242,8 +229,6 @@ class KSamsok:
         return result
 
     def cqlGenerator(self, query):
-        self.requiresKey()
-
         start = 0
         has_more = True
 
@@ -258,8 +243,6 @@ class KSamsok:
             start += 500
 
     def search(self, text, start, hits, images = False):
-        self.requiresKey()
-
         cql = 'text=' + text
         # in erlier versions we added &thumbnailExists=j to url
         if images:
@@ -268,21 +251,17 @@ class KSamsok:
         return self.cql(cql, start, hits)
 
     def geoSearch(self, west, south, east, north, start, hits = 60):
-        self.requiresKey()
-
         cql = 'boundingBox=/WGS84%20"' + str(west) + ' ' + str(south) + ' ' + str(east) + ' ' + str(north)
 
         return self.cql(cql, start, hits)
 
     def getRelations(self, uri, infer_same_as = False):
-        self.requiresKey()
-
         uri = self.formatUri(uri, 'raw')
 
         if not uri:
             return False
 
-        request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=getRelations&relation=all&objectId=' + uri
+        request_query = self.endpoint + 'ksamsok/api?&method=getRelations&relation=all&objectId=' + uri
 
         if infer_same_as:
             request_query += '&inferSameAs=yes'
@@ -307,9 +286,7 @@ class KSamsok:
         return result
 
     def getHints(self, string, count = 5):
-        self.requiresKey()
-
-        request_query = self.endpoint + 'ksamsok/api?x-api=' + self.key + '&method=searchHelp&index=text&prefix=' + string + '*&maxValueCount=' + str(count)
+        request_query = self.endpoint + 'ksamsok/api?method=searchHelp&index=text&prefix=' + string + '*&maxValueCount=' + str(count)
 
         r = requests.get(request_query)
         if not self.validHttpStatus(r.status_code):
