@@ -1,5 +1,5 @@
 from setuptools import setup
-version = '0.7.0'
+version = '0.8.0'
 repo = 'ksamsok-py'
 
 setup(
@@ -8,12 +8,12 @@ setup(
   install_requires=['lxml', 'requests'],
   python_requires='>=3.4.0',
   version = version,
-  description = 'API library for the cultural heritage K-Samsök(SOCH) aggregator.',
+  description = 'API library for the cultural heritage K-samsök(SOCH) aggregator.',
   author = 'Albin Larsson',
   author_email = 'albin.post@gmail.com',
   url = 'https://github.com/Abbe98/' + repo,
   download_url = 'https://github.com/Abbe98/' + repo + '/tarball/' + version,
-  keywords = ['SOCH', 'K-Samsök', 'heritage', 'cultural', 'API'],
+  keywords = ['SOCH', 'K-samsök', 'heritage', 'cultural', 'API'],
   license='MIT',
   classifiers=[
     'License :: OSI Approved :: MIT License',
